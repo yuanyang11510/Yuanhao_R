@@ -50,3 +50,11 @@ duplicate_name # dt1中的出现次超过一次的数据以及其出现的次数
 
 duplicate_data <- dt1[dt1$name %in% duplicate_name$name,]
 duplicate_data
+
+# 如果想要选出重复行，只需要将group_by函数的分组依据设置为所有的列即可
+#* 但是注意，group_by函数的分组依据只接受不带引号的列名称，即不接受字符串，如果需要使用字符串格式的元素作为分组依据，可以使用group_by_at函数，这么做的好处是可以和colnames函数搭配使用（colnames函数的结果是字符串），当然，两者结合的用法可以用更简单的group_by_all函数替换
+dt2_duplicated <- dt2 %>% 
+    group_by_all() %>% 
+    filter(n() > 1) %>% 
+    ungroup()
+dt2_duplicated

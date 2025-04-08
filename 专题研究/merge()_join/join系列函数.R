@@ -6,15 +6,15 @@ getwd()
 #rfr 关于inner_join()、left_join()、right_join()、full_join()、semi_join()、anti_join()函数的效果可视化演示，可以参考：https://zhuanlan.zhihu.com/p/547945673
 
 X <- data.frame(A = 1:3,B1 = c("x","z","y"))
-Y <- data.frame(A = 0,B2 = c("x","z","y","x","z","y"))
+Y <- data.frame(A = 0,B2 = c("x","a","y","x","z","b"))
 X
 Y
 
 # merge()函数
 # （1）连接列会被放置到新表格的首列
-# （2）并且内容会被自动排序
+# （2）内容会被自动排序
 # （3）设置新列下标的参数为suffixes
-merge(X,Y,by.x = "B1",by.y = "B2",all = TRUE,suffixes = c(".1",".2")) 
+merge(X,Y,by.x = "B1",by.y = "B2",all.x = TRUE,suffixes = c(".1",".2")) 
 merge(X,Y,by.x = "B1",by.y = "B2",all = TRUE,sort = FALSE,suffixes = c(".1",".2")) # 即使设置sort = FALSE，连接列中内容相同的部分也会被放置到一起，sort参数控制的仅仅是【在这一基础之上】的内容排序与否
 
 # full_join()函数

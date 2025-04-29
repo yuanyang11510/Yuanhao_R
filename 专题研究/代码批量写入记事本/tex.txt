@@ -1,0 +1,282 @@
+\section{P.248-2鵝}\index{2@2鵝}注释原文：
+\enquote{Two PEM forms are implied : *ŋie2 (FC, AM), *ŋo2 (LT, CC).}
+\section{P.248-3河}\index{3@3河}注释原文：
+\enquote{FC, LT imply *o2 ; AM, CC imply *ho2. The KO form implies PWM *ɦo2.}
+\section{P.248-5我}\index{5@5我}注释原文：
+\enquote{The tonal correspondence in KY, KO is irregular. The SW form is etymologically unrelated.}
+\section{P.249-7茄}\index{7@7茄}注释原文：
+\enquote{The TA form is from the Bon-shio dialect.}
+\section{P.249-10衰}\index{10@10衰}注释原文：
+\enquote{Skinny'.}
+\section{P.250-13果}\index{13@13果}注释原文：
+\enquote{In this word and many others in CC, the nasalized vowel is irregular.}
+\section{P.251-21蝦}\index{21@21蝦}注释原文：
+\enquote{In the sense of shimp GY gives xa, but all the forms here are obviously related to ɣa which is the reading given by GY for 'toad'.}
+\section{P.251-24下}\index{24@24下}注释原文：
+\enquote{In GY 下 has both rising and going tone readings : the localizer is read in rising tone, and the verb in going tone ; the Min dialects do not preserve this distinction. Cf. nos. 414 and 418. For this character, KY has an alternate reading ha5.}
+\section{P.253-31蛇}\index{31@31蛇}注释原文：
+\enquote{PEM doesn't explain the aberrant FC form. Cf. no. 41瓦, no. 135外.}
+\section{P.254-41瓦}\index{41@41瓦}注释原文：
+\enquote{FC, LT imply *ŋue4 ; AM, CC *ŋie4.}
+\section{P.254-42晡}\index{42@42晡}注释原文：
+\enquote{evening'.}
+\section{P.255-43塗}\index{43@43塗}注释原文：
+\enquote{earth' ; WM uses 土 or 泥 for 'earth'.}
+\section{P.255-44蘆}\index{44@44蘆}注释原文：
+\enquote{The EM forms may not be from the popular stratum ; cf. 59, 79, 80.}
+\section{P.255-47湖}\index{47@47湖}注释原文：
+\enquote{KO implies PWM *ɦu2.}
+\section{P.255-48糊}\index{48@48糊}注释原文：
+\enquote{Both KY and KO have alternate readings : KY u9, KO u3 < PWM *ɦu2.}
+\section{P.256-49烏}\index{49@49烏}注释原文：
+\enquote{This is the word for 'black' in Min.}
+\section{P.256-54虎}\index{54@54虎}注释原文：
+\enquote{Cf. the KY word for 'fire' no. 14 ; the SM forms is no. 71, and the FC form in no. 512 have asp. velar stops where MC has a velar fricative.}
+\section{P.258-61徐}\index{61@61徐}注释原文：
+\enquote{The SM (AM and CC) forms imply *tshiu2. The FC form is probably from the learned stratum.}
+\section{P.259-67女}\index{67@67女}注释原文：
+\enquote{TA has an alternate reading : ni3.}
+\section{P.259-70汝}\index{70@70汝}注释原文：
+\enquote{The WM forms are from 你（爾）, not 汝. The SW and PC forms are unrelated.}
+\section{P.260-73去}\index{73@73去}注释原文：
+\enquote{The SM forms imply PEM *khiu5, but FC and LT imply *kho5, agreeing with WM.}
+\section{P.260-75無}\index{75@75無}注释原文：
+\enquote{The tones of KY and KO are irregular ; tone two would normally be expected in both dialects. The SW tone is likewise irregular.}
+\section{P.260-77斧}\index{77@77斧}注释原文：
+\enquote{The KO New Testament has pu7 for this form.}
+\section{P.261-80厝}\index{80@80厝}注释原文：
+\enquote{This (厝) is the traditional way of writing this character in the Min speaking area, but it is not etymologically correct.}
+\section{P.261-81雨}\index{81@81雨}注释原文：
+\enquote{FC huo6 means 'a gust, a shower'. (Maclay p. 1011) The usual word is y3, clearly a borrowing from a non-Min source.}
+\section{P.261-84來}\index{84@84來}注释原文：
+\enquote{FC, LT imply PEM *li2 ; SM forms imply *lai2.}
+\section{P.262-88再}\index{88@88再}注释原文：
+\enquote{FC has an alternate reading kai5.}
+\section{P.262-90刣}\index{90@90刣}注释原文：
+\enquote{A popular character used in some parts of the Min region meaning 'to kill'. The WM forms 'to slaughter' (e.g. chickens).}
+\section{P.263-93艾}\index{93@93艾}注释原文：
+\enquote{Min seems to show two forms throughout the dialects : *ŋie6 in FC, CC, KY, *ŋai6 in LT, AM, TA, KO.}
+\section{P.263-94排}\index{94@94排}注释原文：
+\enquote{FC, LT < *pei2 ; AM, CC, TA < *pai2. KY has an alternate reading vai9.}
+\section{P.265-105臍}\index{105@105臍}注释原文：
+\enquote{Egerod gives the LT reading as literary (p. 98), but it fits the correspondences perfectly.}
+\section{P.265-106西}\index{106@106西}注释原文：
+\enquote{FC, LT imply PEM *sei1 ; AM, CC imply PEM *sai1.}
+\section{P.265-107雞}\index{107@107雞}注释原文：
+\enquote{FC, LT imply PEM *kie1 ; AM, CC, TA *kei1.}
+\section{P.266-111弟}\index{111@111弟}注释原文：
+\enquote{KY has an alternate reading tie5.}
+\section{P.267-115𱹊}\index{115@115𱹊}注释原文：
+\enquote{rice noodles'. This is the character used in FC. AM uses 𥻥 or 𬖴 ; none of these is found in JY.}
+\section{P.267-116価（多）}\index{116@116価（多）}注释原文：
+\enquote{many'. The SW and PC forms are from different etymons (多 in the case of PC).}
+\section{P.267-118壻}\index{118@118壻}注释原文：
+\enquote{The WM forms are from 郎. Note that both Min and Mandarin are quite irregular from the point of view of MC.}
+\section{P.268-123雷}\index{123@123雷}注释原文：
+\enquote{FC, LT imply *lai2, AM, CC imply *lui2, or *luei2 if we take into account the FC pronunciation of this character as a surname : løi2.}
+\section{P.268-126罪}\index{126@126罪}注释原文：
+\enquote{KY lui6 -- recorded thus ; the Kienyang Gospel has zúi    which is tone five.}
+\section{P.270-133（不會）}\index{133@133（不會）}注释原文：
+\enquote{This represents a fusion of the Proto Min negative prefix *m4- and the verb *ei4 'to be able'. The character is used in CC.}
+\section{P.270-134最}\index{134@134最}注释原文：
+\enquote{Either the KY initial is irregular (as assumed for the reconstruction), or the KO tone is, in which case PWM *tsui5 should be reconstructed.}
+\section{P.270-135外}\index{135@135外}注释原文：
+\enquote{FC, LT imply PEM *ŋie6 ; AM, CC, TA imply PEM *ŋua6 or *ŋoi6.}
+\section{P.270-136會}\index{136@136會}注释原文：
+\enquote{The KY form implies PWM *ɦai4.}
+\section{P.271-143肺}\index{143@143肺}注释原文：
+\enquote{The KY form probably implies PWM *pi5.}
+\section{P.272-146知}\index{146@146知}注释原文：
+\enquote{The eastern Min dialects have the following colloquial forms, which may be etymologicaaly connected with 知 : FC tsai1 ('perceive', Maclay p. 22), LT tsai1, CC tsai1, TA tai1 : PEM *tsai1 'to know, perceive'.}
+\section{P.272-148枝}\index{148@148枝}注释原文：
+\enquote{TA uses ŋe1 in the sense of 'branches' ; on the basis of it and FC ŋa6 we can reconstruct an alternate PEM form *ŋe6.}
+\section{P.273-154跬}\index{154@154跬}注释原文：
+\enquote{This is the character used in FC. Etymologically the word is 徛 : JY 巨綺切.}
+\section{P.273-155離}\index{155@155離}注释原文：
+\enquote{The Min forms reflect two different proto forms : *lia2 (LT, AM, CC, TA), *lie6 (FC).}
+\section{P.274-159伊}\index{159@159伊}注释原文：
+\enquote{he' in Eastern Min dialects ; the WM and PC forms are presumably connected with 渠 ; the etymology of the SW form is unclear. The KO tone has changed to tone four by analogy to the first and second person pronouns -- cf. no. 5 and no. 70.}
+\section{P.275-163鼻}\index{163@163鼻}注释原文：
+\enquote{Nasalisation is assumed to be irregular in the SM forms.}
+\section{P.275-164鼻}\index{164@164鼻}注释原文：
+\enquote{to smell'. The FC form implies a PEM form *pi6.}
+\section{P.275-165地}\index{165@165地}注释原文：
+\enquote{AM implies PEM *tei6 ; this PEM final usually corresponds to MC iei (forms 102-118) (都是蟹摄开口四等字) which accords with JY reading. The WM forms are perhaps connected with 社, MC dʑæX (采用Baxter转写系统), note that *lia5 would be expected for KY.}
+\section{P.275-166利}\index{166@166利}注释原文：
+\enquote{PEM shows two proto forms : FC, LT, CC imply *li6 ; AM, TA *lai6.}
+\section{P.276-169貍}\index{169@169貍}注释原文：
+\enquote{PWM *e regularly correponds to PEM *ai ; hence CC and KO preserve the most archaic forms : PEM *lai2 and PWM *se2.}
+\section{P.276-170𥻵}\index{170@170𥻵}注释原文：
+\enquote{glutinous rice cake'. This is the FC character ; AM uses 糍.}
+\section{P.276-171李}\index{171@171李}注释原文：
+\enquote{the fruit. The KO form implies PWM *se4.}
+\section{P.276-172李}\index{172@172李}注释原文：
+\enquote{the surname}
+\section{P.277-178字}\index{178@178字}注释原文：
+\enquote{SM forms imply PEM *ɲi6 ; FC and LT imply PEM *tsi6.}
+\section{P.278-182衣}\index{182@182衣}注释原文：
+\enquote{The SM forms imply *ui1, LT and FC imply i1.}
+\section{P.279-187跪}\index{187@187跪}注释原文：
+\enquote{See note for item no. 339.}
+\section{P.279-188（嘴）}\index{188@188（嘴）}注释原文：
+\enquote{mouth'. Despite superficial similarity none of the colloquial forms here can be assigned to the same etymon as Mandarin tsoei (拼音：zui) ; there is discrepancy both of initial and tone.}
+\section{P.280-194飛}\index{194@194飛}注释原文：
+\enquote{Colloquially, KY, KO use the forms ye9 and ye3 respectively (< PWM *ɦye2).}
+\section{P.280-197未}\index{197@197未}注释原文：
+\enquote{The WM forms are a fusion of *ŋ4 (see no. 534) and *dzaiŋ2 曾.}
+\section{P.281-203稻（粙）}\index{203@203稻（粙）}注释原文：
+\enquote{The EM and all the other dialect forms are from different etymons : the eastern forms are from 粙, JY 直祐切，稻實也（去聲宥韻）. The other froms represent 稻.}
+\section{P.282-208好}\index{208@208好}注释原文：
+\enquote{The PC tone is irregular.}
+\section{P.283-212骹}\index{212@212骹}注释原文：
+\enquote{the usual Min word for foot. GY 跤（骹）脛骨近足細處，口交切（平聲肴韻）.}
+\section{P.284-219趙}\index{219@219趙}注释原文：
+\enquote{KY has the alternate reading io5.}
+\section{P.284-222雕}\index{222@222雕}注释原文：
+\enquote{to carve'.}
+\section{P.285-223調}\index{223@223調}注释原文：
+\enquote{to mix'.}
+\section{P.285-225鳥}\index{225@225鳥}注释原文：
+\enquote{The KY, KO forms are from a different etymon. Related to 雀 ?}
+\section{P.286-230猴}\index{230@230猴}注释原文：
+\enquote{PC literary ; in the colloquial a monkey is called ku3 sun1 狗孫.}
+\section{P.286-232後}\index{232@232後}注释原文：
+\enquote{In SW the usual colloquial form for 'behind' is pei5 xy7 ; the xy7 (?< xy3) may be the more authentic colloquial form for this character.}
+\section{P.288-241泅}\index{241@241泅}注释原文：
+\enquote{The most common Min word for 'to swim'.}
+\section{P.288-244婦}\index{244@244婦}注释原文：
+\enquote{The SW form occurs only in the compound sən2 .pʰy where it has neutral tone.}
+\section{P.290-257蠶}\index{257@257蠶}注释原文：
+\enquote{FC, LT < *tsham2 ; AM, CC, TA < *tshan2. Another possibility is that this is the regular reflex of *em and that the two preceding examples are from the learned stratum. Cf. 笠 AM lueʔ8, CC loiʔ8, KO se6, MC lip (Baxter转写系统).}
+\section{P.293-274鹽}\index{274@274鹽}注释原文：
+\enquote{A small number of Min forms have initial s- where MC has the zero initial ; see nos. 438, 441 in this corpus. Also cf. the following form : 檐 FC sieŋ2, AM sian2, MC jem (Baxter转写系统).}
+\section{P.294-279甜}\index{279@279甜}注释原文：
+\enquote{Two PEM etymons are involved here : FC, AM *tiam1 ; LT, CC, TA *tam2.}
+\section{P.294-280點}\index{280@280點}注释原文：
+\enquote{to kindle'.}
+\section{P.NA-286針}\index{286@286針}注释原文：
+\enquote{If CC is taken to represent the older situation here, then PEM would be *tsem1.}
+\section{P.296-289飲}\index{289@289飲}注释原文：
+\enquote{rice gruel'.}
+\section{P.296-290妗}\index{290@290妗}注释原文：
+\enquote{JY : 巨禁切俗謂舅母曰妗（去聲沁韻）. Both Min and Cantonese (khɐm4) have rising tone for this form : cf. no. 203.}
+\section{P.296-291汁}\index{291@291汁}注释原文：
+\enquote{Cf. no. 286.}
+\section{P.296-292濕}\index{292@292濕}注释原文：
+\enquote{The Eastern Min forms may belong to the learned stratum. Colloquially LT, AM, CC use reflexes of PEM *tem2 for 'wet'. FC uses laŋ6 濫.}
+\section{P.296-293十}\index{293@293十}注释原文：
+\enquote{The KO tone is irregular.}
+\section{P.297-299灠}\index{299@299灠}注释原文：
+\enquote{saliva'. One would expect tone 6 in FC.}
+\section{P.297-300傘}\index{300@300傘}注释原文：
+\enquote{FC and WM imply *son3, the SM dialects imply *son5.}
+\section{P.299-307閑}\index{307@307閑}注释原文：
+\enquote{Here KO implies PWM *ɦaiŋ2.}
+\section{P.299-308㾪}\index{308@308㾪}注释原文：
+\enquote{lean'. The WM forms are etymologically 瘦.}
+\section{P.299-309𠕇}\index{309@309𠕇}注释原文：
+\enquote{hard'. The WM forms are from 硬.}
+\section{P.300-316囝}\index{316@316囝}注释原文：
+\enquote{JY 囝，閩人呼兒曰囝，九件切（上聲獮韻）LT, KY, KO, SW, PC all agree with the JY form ; the other dialects seem rather to imply a MC *kiaŋ.}
+\section{P.300-318舌}\index{318@318舌}注释原文：
+\enquote{KO has an alternate reading ye8.}
+\section{P.391-320邊}\index{320@320邊}注释原文：
+\enquote{FC, LT imply *pan1 ; AM, CC, TA imply *pian1.}
+\section{P.391-323年}\index{323@323年}注释原文：
+\enquote{CC has an alternate reading hĩ2 (Lii Yeongming, p. 204) ; this and the TA reading imply a proto Min form *ŋian2 or *hian2. Compare the initial of the PC form.}
+\section{P.304-339斷}\index{339@339斷}注释原文：
+\enquote{Here FC has exceptionally preserved a rising tone in this word. Likewise 'kneel' (see item 187) has two reflexes in FC, a regular kui6 and an exceptional khui3 (Maclay p. 448). Cf. also LT khuai3 'to worship' (< 'to kneel') ; FC laŋ3 'saliva' no. 299.}
+\section{P.304-340卵}\index{340@340卵}注释原文：
+\enquote{Cf. The early Vietnamese loan from Chinese soan in trái soan 'oval-shaped'.}
+\section{P.305-347關}\index{347@347關}注释原文：
+\enquote{These correspondences are irregular for both Eastern and Western Min.}
+\section{P.306-350圓}\index{350@350圓}注释原文：
+\enquote{The KO form implies PWM *ɦyeŋ2.}
+\section{P.307-358懸}\index{358@358懸}注释原文：
+\enquote{high, tall' -- thus in EM. WM forms are reflexes of MC ngau 喬.}
+\section{P.308-361鱗}\index{361@361鱗}注释原文：
+\enquote{Cf. nos. 432, 433, 434, 483, 484.}
+\section{P.308-363陳}\index{363@363陳}注释原文：
+\enquote{Cf. nos. 432, 433, 434, 483, 484.}
+\section{P.308-365忍}\index{365@365忍}注释原文：
+\enquote{Cf. also Amoy lun3 (Campbell p. 485). It seems likely that two different etymons are involved here : *nun3, *ɲim3.}
+\section{P.310-373一}\index{373@373一}注释原文：
+\enquote{Cf. no. 533.}
+\section{P.311-379褪}\index{379@379褪}注释原文：
+\enquote{to take off'.}
+\section{P.312-386秫}\index{386@386秫}注释原文：
+\enquote{glutinous rice'.}
+\section{P.312-388分}\index{388@388分}注释原文：
+\enquote{to share'.}
+\section{P.313-395郎}\index{395@395郎}注释原文：
+\enquote{The WM forms mean 'son-in-law'. Cf. TA lo2 ke1 郎家 'son-in-law'.}
+\section{P.314-399囥}\index{399@399囥}注释原文：
+\enquote{to store, to put away'.}
+\section{P.316-411兩}\index{411@411兩}注释原文：
+\enquote{two'. FC and LT imply *laŋ4 ; the SM dialcts imply *noŋ4 or *loŋ4.}
+\section{P.316-414上}\index{414@414上}注释原文：
+\enquote{as a verb ; cf. item 418 below.}
+\section{P.317-416癢}\index{416@416癢}注释原文：
+\enquote{The WM correspondence is irregular.}
+\section{P.317-418上}\index{418@418上}注释原文：
+\enquote{as a localizer.}
+\section{P.317-420箬}\index{420@420箬}注释原文：
+\enquote{leaf'. SM forms imply *hiok8 or *ŋiok8. FC, LT imply *niok8. This character is used in FC.}
+\section{P.318-424王}\index{424@424王}注释原文：
+\enquote{Campbell (p. 503) gives an Amoy reading ŋ2 ; this and FC would imply PEM *uoŋ. Cf. Chieh-yang : heŋ2.}
+\section{P.320-434贃}\index{434@434贃}注释原文：
+\enquote{to earn' ; this is the FC character.}
+\section{P.321-440食}\index{440@440食}注释原文：
+\enquote{The KY, KO forms may be from 饁 rather than 食 (Pan Mawdiing, p. 479, note 4). The etymology of the PC form is unclear.}
+\section{P.321-441翼}\index{441@441翼}注释原文：
+\enquote{wing' ; cf. KY khe7 poŋ3 'wing'.}
+\section{P.321-444生}\index{444@444生}注释原文：
+\enquote{born'.}
+\section{P.322-445生}\index{445@445生}注释原文：
+\enquote{raw'. ?青.}
+\section{P.322-447行}\index{447@447行}注释原文：
+\enquote{to walk'.}
+\section{P.322-449拍}\index{449@449拍}注释原文：
+\enquote{The KY, KO forms are from 𢫦 MC maek （Baxter转写系统）. GY 𢫦，擊也，莫白切（入聲陌韻）. One would expect eʔ for the SM forms ; this discrepancy may due to borrowing within the Min area.}
+\section{P.323-456兵}\index{456@456兵}注释原文：
+\enquote{The PEM form is based on the Chao-chou and Ting-an forms ; the other seem to be from the learned stratum.}
+\section{P.326-472䭕}\index{472@472䭕}注释原文：
+\enquote{insipid, unsalty'. This is the FC character.}
+\section{P.326-474凊（𩇝）}\index{474@474凊（𩇝）}注释原文：
+\enquote{cold'. JY 凊，說文寒也，七正切（去聲勁韻）.}
+\section{P.328-484釘}\index{484@484釘}注释原文：
+\enquote{Chin-chiang (=Ch'üan-chou) has tan1 for this word ; the AM form is probably from the learned stratum.}
+\section{P.328-486星}\index{486@486星}注释原文：
+\enquote{FC, LT imply PEM *siŋ1 ; AM, CC, TA imply *tshaŋ1.}
+\section{P.329-487鼎}\index{487@487鼎}注释原文：
+\enquote{cooking pot'.}
+\section{P.329-490錫}\index{490@490錫}注释原文：
+\enquote{AM, CC imply PEM *siak7 ; FC, LT imply *sik7.}
+\section{P.330-497同}\index{497@497同}注释原文：
+\enquote{The tone is irregular in KY ; cf. 498.}
+\section{P.331-502工}\index{502@502工}注释原文：
+\enquote{In KY, KO and SW, this is the word for 'day' (= Mandarin tian).}
+\section{P.332-507痛}\index{507@507痛}注释原文：
+\enquote{KY, KO, SW probabaly represent 疾.}
+\section{P.332-510農}\index{510@510農}注释原文：
+\enquote{In the Eastern Min dialects (and Pucheng) this is the usual colloquial word for 'man, person'. The Western Min forms are from 人 ɲin （Baxter转写系统）.}
+\section{P.333-512熊}\index{512@512熊}注释原文：
+\enquote{The usual word in FC is hyŋ2, but khiŋ2 (Maclay, p. 432) seems to be from the popular stratum while hyŋ2 is from the learned. PEM may have had two forms : *khim2 ~ *him2.}
+\section{P.334-517肉}\index{517@517肉}注释原文：
+\enquote{TA implies PEM *ŋiuk8.}
+\section{P.334-521松}\index{521@521松}注释原文：
+\enquote{LT and AM imply PEM *tshiuŋ2.}
+\section{P.335-525重}\index{525@525重}注释原文：
+\enquote{*luŋ5 would be expected for KY.}
+\section{P.335-526縫}\index{526@526縫}注释原文：
+\enquote{crack'.}
+\section{P.335-527𧚔}\index{527@527𧚔}注释原文：
+\enquote{to wear (clothes)' ; the PC form is from 着.}
+\section{P.336-533（一）}\index{533@533（一）}注释原文：
+\enquote{? < 蜀 dʑowk (Baxter转写系统) : FY 一，蜀也（XII, III ; see also the footnote on the same page）. WM ? < dʑi8 ; the correspondence is irregular.}
+\section{P.336-534（不）}\index{534@534（不）}注释原文：
+\enquote{The KY : KO correpondence is not otherwise attested.}
+\section{P.337-535（這）}\index{535@535（這）}注释原文：
+\enquote{this'. KO iuŋ7 seems to be a fusion of *i7 and ioŋ6 'kind'.}
+\section{P.337-536（那）}\index{536@536（那）}注释原文：
+\enquote{that'.}

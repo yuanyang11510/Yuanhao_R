@@ -1,0 +1,119 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[margin=1em,paperheight=8cm,paperwidth=12cm]{geometry}  
+\usepackage{booktabs,lipsum}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+% latex table generated in R 4.3.1 by xtable 1.8-4 package
+% Sun May 18 17:06:35 2025
+\begin{table}[ht]
+\centering
+\caption{Example with \texttt{xtable}} 
+\begin{tabular}{rrrrrrr}
+  \toprule
+ & mpg & cyl & disp & hp & drat & wt \\ 
+  \midrule
+Mazda RX4 & 21.00 & 6.00 & 160.00 & 110.00 & 3.90 & 2.62 \\ 
+  Mazda RX4 Wag & 21.00 & 6.00 & 160.00 & 110.00 & 3.90 & 2.88 \\ 
+  Datsun 710 & 22.80 & 4.00 & 108.00 & 93.00 & 3.85 & 2.32 \\ 
+   \bottomrule
+\end{tabular}
+\end{table}
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: 周日, 5月 18, 2025 - 17:06:35
+\begin{table}[!htbp] \centering 
+  \caption{Example with \texttt{stargazer}} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}} ccccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & mpg & cyl & disp & hp & drat & wt \\ 
+\hline \\[-1.8ex] 
+Mazda RX4 & $21$ & $6$ & $160$ & $110$ & $3.900$ & $2.620$ \\ 
+Mazda RX4 Wag & $21$ & $6$ & $160$ & $110$ & $3.900$ & $2.875$ \\ 
+Datsun 710 & $22.800$ & $4$ & $108$ & $93$ & $3.850$ & $2.320$ \\ 
+\hline \\[-1.8ex] 
+\end{tabular} 
+\end{table} 
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-2}Example with  \texttt{kable}  and \texttt{kableExtra}}
+\centering
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+  & mpg & cyl & disp & hp & drat & wt\\
+\midrule
+Mazda RX4 & 21.0 & 6 & 160 & 110 & 3.90 & 2.620\\
+Mazda RX4 Wag & 21.0 & 6 & 160 & 110 & 3.90 & 2.875\\
+Datsun 710 & 22.8 & 4 & 108 & 93 & 3.85 & 2.320\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!tbp]
+\caption{Example with  \texttt{Hmisc}\label{df}} 
+\begin{center}
+\begin{tabular}{lrrrrrr}
+\hline\hline
+\multicolumn{1}{l}{df}&\multicolumn{1}{c}{mpg}&\multicolumn{1}{c}{cyl}&\multicolumn{1}{c}{disp}&\multicolumn{1}{c}{hp}&\multicolumn{1}{c}{drat}&\multicolumn{1}{c}{wt}\tabularnewline
+\hline
+Mazda RX4&$21.0$&$6$&$160$&$110$&$3.90$&$2.620$\tabularnewline
+Mazda RX4 Wag&$21.0$&$6$&$160$&$110$&$3.90$&$2.875$\tabularnewline
+Datsun 710&$22.8$&$4$&$108$&$ 93$&$3.85$&$2.320$\tabularnewline
+\hline
+\end{tabular}\end{center}
+\end{table}
+
+\end{document}

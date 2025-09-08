@@ -1,6 +1,21 @@
 # 下述例子基本都受ChatGPT的启发，部分代码和注释由ChatGPT提供或者由VS Code内部AI智能补全，不再明确标注
 options(width = 128) # 控制VS Code中R终端的显示宽度
 
+## 目录
+## 一、plot()函数
+## 二、assocplot()函数
+## 三、barplot()函数
+## 四、boxplot()函数
+## 五、cdplot()函数
+## 六、contour()函数
+## 七、coplot()函数
+## 八、curve()函数
+## 九、dotchart()函数
+## 十、fourfoldplot()函数
+## 十一、hist()函数
+## 十二、image()函数
+
+
 ## 一、plot()函数
 x_plot <- -5:5
 y_plot <- x_plot^2
@@ -121,7 +136,7 @@ assocplot(
 #* 注意：assocplot()函数的最后一个参数后面不能有","号，否则会报错，这种表现和plot()函数不同，前一类型还包括下文的boxplot()函数，后一类型还包括下文的barplot()函数，这和这些函数的底层实现有关，简单而言，plot()函数、barplot()函数的参数定义是以",..."结尾的，因此允许最后一个参数后面带","号，而assocplot()函数、boxplot()函数的参数不是以",..."结尾的，而是以一个具体的参数结尾的，因此不允许最后一个参数后面带","号
 
 ## 三、barplot()函数
-# 条形图/柱状图（bar plot）用于展示分类数据的频数或比例
+# 条形图/柱状图（bar chart/graph）用于展示分类数据的频数或比例
 # 向量
 v_bar <- c(5, 10, 7)
 v_bar
@@ -148,7 +163,7 @@ barplot(
 barplot(v_bar,col = c("red","yellow","blue")) # 每个条形一种颜色
 
 # 矩阵
-m_bar <- m_assoc
+m_bar <- matrix(c(11,23,41,56,23,78,34,68,99),3,dimnames = list(c("a","b","c"),c("A","B","C")))
 m_bar
 barplot(m_bar)
 
@@ -175,7 +190,7 @@ barplot(
 )
 
 ## 四、boxplot()函数
-# 箱线图（box plot）用于展示数据的分布情况，显示中位数、四分位数、异常值等信息
+# 箱线图（box plot/box-and-whisker plot）用于展示数据的分布情况，显示中位数、四分位数、异常值等信息
 x_box <- c(-10,-1,0,1,2,7,15)
 quantile(x_box)
 summary(x_box)
@@ -242,8 +257,8 @@ boxplot(
     horizontal = TRUE # 水平显示
 )
 
-## 四、cdplot()函数
-# 条件密度图（Conditional Density Plot）
+## 五、cdplot()函数
+# 条件密度图（conditional density plot）
 # 它的主要作用：
 # 显示类别型变量在连续型变量的不同值下的条件概率分布
 # 帮助判断连续变量是否能区分不同的类别
@@ -310,7 +325,7 @@ cdplot(
 cdplot(f_cd ~ x_cd)
 cdplot(f_cd ~ x_cd,ylevels = c("A","B"))
 
-## （五）contour()函数
+## 六、contour()函数
 # 等高线图（contour plot）
 contour(volcano)
 
@@ -329,7 +344,7 @@ contour(
 )       
 #* levels参数的默认值为pretty(zlim, nlevels)，pretty()函数的作用是根据zlim的最大值和最小值以及nlevels的值，使得自动生成的高度标签内容看起来比较【齐整】，所以往往是整数，如果通过levels参数手动设置高度标签内容，则nlevels参数会被忽略
 
-## 六、coplot()函数
+## 七、coplot()函数
 # 条件散点图（conditioning plot）
 # 当我们想要研究两个变量之间的关系，但这个关系可能受到第三个（甚至第四个）变量的影响，就可以用coplot()来画图
 # （1）一般参数
@@ -357,7 +372,170 @@ coplot(
 
 # bar.bg参数的默认值是：bar.bg = c(num = gray(0.8), fac = gray(0.95))，意为当条件变量是数值型（numeric）时，条件条的背景颜色用gray(0.8)，当条件变量是因子型（factor）时，条件条的背景颜色用gray(0.95)，因此可以看见上述三种情况中，前两种情况的条件条背景颜色相同，和第三种情况的条件条背景颜色不同
 
-## 七、curve()函数
+## 八、curve()函数
+# 用来绘制函数曲线。它的核心思想是：给它一个数学函数，它会帮你在给定区间内自动取点、计算函数值并画出平滑曲线
+curve(x^2,from = -3,to = 3)
+#* 注意数据来源必须是“表达式”（expression），而不能是“公式”（formula），但可以是“函数”（function）
+
+# （1）n参数
+curve(x^2,from = -3,to = 3,n = 5)
+curve(x^2,from = -3,to = 3,n = 10)
+curve(x^2,from = -3,to = 3,n = 50)
+curve(x^2,from = -3,to = 3,n = 101) # 默认值
+curve(x^2,from = -3,to = 3,n = 200)
+#* 和plot()函数相比，curve()函数不需要提前指定x和y的取值，而plot()函数强制要求提前指定x和y的取值，这是因为curve()函数会提前规定一个x的取值数量（默认值为101），本质上，curve()函数画出的其实也是【折线图】，只不过默认取的x值的数量比较多，看起来像是【平滑】的线条一样
+
+# （2）xname参数
+curve(a^2,from = -3,to = 3,xname = "a") # 改变x轴的变量名称
+#* 注意此时表达式当中的变量名称也要相应改变
+
+## 九、dotchart()函数
+# 点图（dot chart）分为两种，一种用来表示离散值的分布，类似直方图（histogram）的作用，R中通过带状图函数stripchart()来绘制，另一种是此处的Cleveland dot chart/plot，用来展示范畴类变量，可以看作是条形图（bar chart）或者饼图（pie chart）的替代
+# 向量（无分组）
+v_dot <- c(25, 40, 15, 30) # x轴刻度的来源
+names(v_dot) <- c("A", "B", "C", "D") # y轴标签的来源（方法一：为向量元素命名）
+dotchart(
+    v_dot, # x轴刻度、y轴标签
+    main = "简单点图",
+)
+
+# 向量（分组）
+v_dot2 <- c(25, 40, 15, 30, 35, 20) # x轴刻度的来源
+v_label_dot <- c("A", "B", "C", "D", "E", "F") # y轴标签的来源（方法二：用另一个向量表示）
+v_group_dot <- factor(c("G1", "G1", "G1", "G2", "G1", "G2")) # y轴分组的来源
+v_mean_dot <- tapply(v_dot2,v_group_dot,mean) # 分组代表值的来源（常常取平均数或者中位数,tapply()函数给出一个带元素名称的向量）
+
+dotchart(
+    v_dot2, # x轴刻度
+    labels = v_label_dot, # y轴标签（可以通过命名数据向量名称替代）
+    color = c("blue","darkgreen"), # 点和对应y轴标签的颜色
+    groups = v_group_dot, # y轴分组
+    gdata = v_mean_dot, # 分组代表值
+    gcolor = "red", # y轴分组颜色
+    main = "分组点图"
+)
+#* color参数可以设置任意多的颜色，如果颜色数少于数据数，会循环自身使得颜色数与数据数相同。这种情况虽然不会报错，但是对于可视化效果没有什么意义，除非是为每一个数据设置了一个单独的颜色，更常见的做法见下文
+
+dotchart(
+    v_dot2,
+    labels = v_label_dot,
+    color = c("blue","darkgreen")[as.numeric(v_group_dot)],
+    groups = v_group_dot,
+    gdata = v_mean_dot,
+    gcolor = "red",
+    main = "分组点图"
+)
+#* 为颜色向量加上索引[as.numeric(group_dot)]，索引由因子数值化而来，这样可以保证同一分组内的数据带有相同的颜色
+
+# 矩阵
+m_dot <- matrix(c(25, 40, 15, 30, 35, 20), ncol = 2)
+rownames(m_dot) <- c("A", "B", "C") # 行名对应y轴标签（之后不再需要设置labels参数）
+colnames(m_dot) <- c("组1", "组2") # 列名对应y轴分组（之后不再需要设置groups参数）
+m_dot
+m_f_dot <- rep(1:nrow(m_dot),ncol(m_dot)) # 为矩阵创设因子水平
+m_median_dot <- apply(m_dot,2,median) # 计算分组代表值
+
+dotchart(
+    m_dot,
+    color = c("blue", "darkgreen")[m_f_dot],
+    pch = 19, # 控制数据点的样式
+    gdata = m_median_dot,
+    gpch = 19, # 控制分组点的样式
+    gcolor = "red",
+    main = "多系列点图"
+)
+
+## 十、fourfoldplot()函数
+# 四分图（fourfold display）
+# 数据必须是一个2*2的矩阵、数据框，或者包含数个2*2矩阵的数组
+# 2*2的矩阵
+m_fourfold <- matrix(
+    c(12, 5, 7, 15),
+    nrow = 2,
+    byrow = TRUE,
+    dimnames = list(
+        Treatment = c("Drug", "Placebo"),
+        Outcome = c("Improved", "Not Improved")
+    )
+)
+fourfoldplot(m_fourfold)
+
+# color参数
+# 前一个颜色标注数量更少的对角线区域，后一个颜色标注数量更多的对角线区域
+fourfoldplot(m_fourfold,color = c("red","blue"))
+
+# conf.level参数
+# 控制各变量的置信区间范围，影响置信环（confidence ring）的大小
+fourfoldplot(m_fourfold,conf.level = 0)
+fourfoldplot(m_fourfold,conf.level = .5)
+fourfoldplot(m_fourfold,conf.level = .95) # 默认值
+
+# 2*2*3的数组
+ary_fourfold <- array(
+    c(12, 5, 7, 15, 8, 2, 20, 10,1,2,3,4),
+    dim = c(2, 2, 3),
+    dimnames = list(
+        Treatment = c("Drug", "Placebo"),
+        Outcome   = c("Improved", "Not Improved"),
+        Group     = c("Young", "Old","abc")
+    )
+)
+ary_fourfold
+fourfoldplot(ary_fourfold)
+
+# 2*2*2的数组
+ary_fourfold <- array(
+    c(12, 5, 7, 15, 8, 12, 20, 10,1,2,3,4,1,2,3,4,1,2,3,4),
+    dim = c(2, 2, 5),
+    dimnames = list(
+        Treatment = c("Drug", "Placebo"),
+        Outcome   = c("Improved", "Not Improved"),
+        Group     = c("Young", "Old","abc","abc","abc")
+    )
+)
+ary_fourfold
+fourfoldplot(ary_fourfold)
+
+## 十一、hist()函数
+# 直方图（histogram）
+r_hist <- rnorm(200)
+break_hist <- seq(min(r_hist),max(r_hist),length.out = 10)
+break_hist
+hist(r_hist)
+h_hist <- hist(r_hist)
+h_hist
+h_hist$breaks # hist() 不仅绘图，还会返回一个包含直方图信息的对象（一个列表），包括：breaks（分段边界）、counts（各段频数）、density（各段密度）、mids（各段中点）、xname（变量名）
+
+# （1）breaks参数
+# 控制数据的分段数
+hist(r_hist,breaks = break_hist) # 用向量表示各个节点，10个节点分成9段
+#* 以下两种方法，R会自动调整最终的分段数，以保证图像的美观
+hist(r_hist,breaks = 4) # 直接指出分段数（实际有6段）
+hist(r_hist,breaks = "Sturges") # 默认值，选用R内置的公式计算分段数，还可以选择"Scott"、"FD"（Freedman–Diaconis rule）等
+
+# （2）freq和probability参数
+hist(r_hist,freq = TRUE) # 默认值，y轴表示频数
+hist(r_hist,probability = TRUE) # 等效于freq = FALSE，y轴表示密度，面积总和为1
+
+# （3）labels参数
+# 控制每一段的标签显示（默认值为FALSE）
+hist(r_hist,labels = TRUE)
+
+# （4）right参数和include.lowest参数
+hist(c(1,3,5),breaks = c(1,3,5),labels = TRUE,right = TRUE) # 默认值，表示分段区间左开右闭
+#* 此时include.lowest参数默认为TRUE，因此位于最左侧节点的0也被包括进来
+hist(c(1,3,5),breaks = c(1,3,5),labels = TRUE,right = FALSE) # 表示分段区间左闭右开
+#* 此时include.lowest参数的实际含义变为“include.highest”，即位于最右侧节点的5也被包括进来
+hist(c(1,3,5),breaks = c(1,3,5),right = TRUE,labels = TRUE,include.lowest = FALSE) # 结果报错
+hist(c(1,3,5),breaks = c(1,3,5),right = FALSE,labels = TRUE,include.lowest = FALSE) # 结果报错
+#* 通过上面两个例子可以发现，设置include.lowest = FALSE不是为了排除最值，而是为了能够在最值刚好落在左右端点上时提供报错信息，提醒人工处理（有的时候，人们不希望【最值被强行归入区间】这种极端情况出现）
+
+## 十二、image()函数
+
+
+
+
+
 
 
 

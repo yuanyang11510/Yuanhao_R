@@ -14,6 +14,7 @@ options(width = 128) # 控制VS Code中R终端的显示宽度
 ## 十、fourfoldplot()函数
 ## 十一、hist()函数
 ## 十二、image()函数
+## 十三、matplot()函数
 
 
 ## 一、plot()函数
@@ -217,11 +218,11 @@ boxplot(
 
 # （2）notch参数
 set.seed(123)
-r_box1 <- rnorm(20, mean = 5)
-r_box2 <- rnorm(20, mean = 7)
-r_box3 <- rnorm(20, mean = 6)
+v_box1 <- rnorm(20, mean = 5)
+v_box2 <- rnorm(20, mean = 7)
+v_box3 <- rnorm(20, mean = 6)
 boxplot(
-    r_box1,r_box2,r_box3,
+    v_box1,v_box2,v_box3,
     names = c("A", "B", "C"),
     main = "三组数据的箱线图",
     col = c("skyblue", "pink", "lightgreen"),
@@ -498,28 +499,28 @@ fourfoldplot(ary_fourfold)
 
 ## 十一、hist()函数
 # 直方图（histogram）
-r_hist <- rnorm(200)
-break_hist <- seq(min(r_hist),max(r_hist),length.out = 10)
+v_hist <- rnorm(200)
+break_hist <- seq(min(v_hist),max(v_hist),length.out = 10)
 break_hist
-hist(r_hist)
-h_hist <- hist(r_hist)
+hist(v_hist)
+h_hist <- hist(v_hist)
 h_hist
 h_hist$breaks # hist() 不仅绘图，还会返回一个包含直方图信息的对象（一个列表），包括：breaks（分段边界）、counts（各段频数）、density（各段密度）、mids（各段中点）、xname（变量名）
 
 # （1）breaks参数
 # 控制数据的分段数
-hist(r_hist,breaks = break_hist) # 用向量表示各个节点，10个节点分成9段
+hist(v_hist,breaks = break_hist) # 用向量表示各个节点，10个节点分成9段
 #* 以下两种方法，R会自动调整最终的分段数，以保证图像的美观
-hist(r_hist,breaks = 4) # 直接指出分段数（实际有6段）
-hist(r_hist,breaks = "Sturges") # 默认值，选用R内置的公式计算分段数，还可以选择"Scott"、"FD"（Freedman–Diaconis rule）等
+hist(v_hist,breaks = 4) # 直接指出分段数（实际有6段）
+hist(v_hist,breaks = "Sturges") # 默认值，选用R内置的公式计算分段数，还可以选择"Scott"、"FD"（Freedman–Diaconis rule）等
 
 # （2）freq和probability参数
-hist(r_hist,freq = TRUE) # 默认值，y轴表示频数
-hist(r_hist,probability = TRUE) # 等效于freq = FALSE，y轴表示密度，面积总和为1
+hist(v_hist,freq = TRUE) # 默认值，y轴表示频数
+hist(v_hist,probability = TRUE) # 等效于freq = FALSE，y轴表示密度，面积总和为1
 
 # （3）labels参数
 # 控制每一段的标签显示（默认值为FALSE）
-hist(r_hist,labels = TRUE)
+hist(v_hist,labels = TRUE)
 
 # （4）right参数和include.lowest参数
 hist(c(1,3,5),breaks = c(1,3,5),labels = TRUE,right = TRUE) # 默认值，表示分段区间左开右闭
@@ -531,6 +532,124 @@ hist(c(1,3,5),breaks = c(1,3,5),right = FALSE,labels = TRUE,include.lowest = FAL
 #* 通过上面两个例子可以发现，设置include.lowest = FALSE不是为了排除最值，而是为了能够在最值刚好落在左右端点上时提供报错信息，提醒人工处理（有的时候，人们不希望【最值被强行归入区间】这种极端情况出现）
 
 ## 十二、image()函数
+# heat map（热图）/raster image（栅格图）
+
+# 构造一个网格
+x_image <- seq(-pi, pi, length = 50)
+y_image <- seq(-pi, pi, length = 50)
+m_image <- outer(x_image, y_image, function(x, y) cos(x) + sin(y)) # 数据来源（一个矩阵）
+
+# 绘制
+# （1）一般参数
+image(
+    # x = seq(0,1,length.out =50), # x轴刻度（）
+    y = seq(-1000,1000,length.out =51), # y轴刻度（可以省略）
+    #* x、y是两个向量，长度分别等于矩阵的行数（或者行数+1）和列数（或者列数+1），当x = 矩阵行数+1时，表示分段边界，当x = 矩阵行数时，表示分段中点，y同理
+    z = m_image, # 数值矩阵
+    col = topo.colors(50), # col参数中可以使用一系列的颜色生成函数（hcl.colors、hcl.colors、heat.colors、terrain.colors、topo.colors、cm.colors、gray.colors等）
+    xlab = "X", ylab = "Y",
+    main = "cos(x) + sin(y)"
+)
+
+# （2）矩阵内容也可以是逻辑值
+m_image3 <- matrix(rep(c(TRUE,FALSE),6),3)
+image(m_image3, col = heat.colors(6))
+
+# （3）结果呈现的效果是将原来的矩阵逆时针旋转90度后的排列格局
+m_image4_1 <- matrix(c(0,0,1)) # 3*1的矩阵
+m_image4_2 <- matrix(c(0,0,1),1) # 1*3的矩阵
+m_image4_3 <- matrix(c(0,1,1,0),2) # 2*2的矩阵
+image(m_image4_1)
+image(m_image4_2)
+image(m_image4_3)
+
+# （4）breaks参数
+# 控制矩阵当中数据的分段断点（一段对应一种颜色）
+m_image2 <- matrix(seq(0, 1, length = 100), nrow = 10)
+image(m_image2) # 既不设置颜色数，也不设置断点
+image(m_image2, col = heat.colors(5)) # 设置颜色数，但不设置断点
+#* 默认情况下，R会让每一个颜色统摄的数据数尽量平衡，更多细节见下一节
+breaks_image <- c(-0.5, 0.1, 0.3, 0.6, 0.9, 1.5) # 手动设置断点
+image(m_image2, col = heat.colors(5), breaks = breaks_image)
+#* breaks参数包含一系列断点，总数应该比颜色数多一个
+breaks_image2 <- seq(0.1, 0.9, length = 6) # 均匀设置断点，但只取到0.1和0.9之间
+breaks_image2
+image(m_image2, col = heat.colors(5), breaks = breaks_image2)
+#* 0-0.1和0.9-1的两段区间内的数据不上色
+
+# （5）颜色和数据的对应
+m_image5 <- matrix(c(0,1,2,3,4,5))
+# 数据和颜色一一对应
+image(m_image5,col = c("red","orange","yellow","green","cyan","blue"))
+# 数据数少于颜色数
+image(m_image5,col = c("red","orange","yellow","green","cyan","blue","purple")) # 绿色没有用到
+# 数据数多于颜色数
+image(m_image5,col = c("red","orange","yellow","green","cyan")) # 红色用了两次
+image(m_image5,col = c("red","orange","yellow","green")) # 红色、绿色各用了两次
+image(m_image5,col = c("red","orange","yellow")) # 三种颜色各用了两次
+image(m_image5,col = c("red","orange")) # 两种颜色各用了三次
+#* 颜色和数据（升序排列）的对应关系是：第一个颜色和第一个数据对应，最后一个颜色和最后一个数据对应，两侧颜色和数据向中间靠拢对应，如果数据数少于颜色数，则多余的颜色不画出，如果数据数多于颜色数，情况比较复杂，但可以发现两个原则：（1）每种颜色的使用次数尽可能接近（由上一节的内容可知，这是由于R默认会使每个颜色统摄的数据数尽量平衡）；（2）优先重复使用两侧的颜色，对称的一对颜色中，优先重复使用左侧的颜色
+
+## 十三、matplot()函数
+# 利用一个矩阵（“mat(ries)”）的每一列数据一次性画出（“plot”）所有的函数图像
+
+# 准备一个矩阵
+v_mat <- c(seq(0,1,length.out = 10),seq(1,10,length.out = 50))
+m_mat <- cbind(
+  v_mat, # 正比例函数
+  v_mat^2, # 二次函数
+  sqrt(v_mat), # 平方根
+  1/v_mat, # 反比例函数
+  log(v_mat), # 对数函数
+  exp(v_mat), # 指数函数
+  sin(v_mat), # 正弦函数
+  cos(v_mat) # 余弦函数
+)
+colnames(m_mat) <- c("x","x^2","sqrt(x)","1/x","log(x)","e^x","sin(x)","cos(x)")
+# 绘制
+matplot(v_mat, m_mat, type = "o",pch = 20, col = 1:8, xlab = "X", ylab = "Y", main = "matplot示例",xlim =c(0,10),ylim = c(-3,10),lend = "butt")
+# 取图形坐标范围
+usr_mat <- par("usr") # c(xmin, xmax, ymin, ymax)
+# 画x轴箭头
+arrows(
+    x0 = usr_mat[1], y0 = 0, # 起点
+    x1 = usr_mat[2], y1 = 0, # 终点
+    length = 0.1, # 箭头顶端线段长度
+    angle = 20, # 箭头顶端角度
+    code = 2,  # 箭头画在终点（1=起点，2=终点，3=两端）
+)
+# 画y轴箭头
+arrows(
+    x0 = 0, y0 = usr_mat[3], # 起点
+    x1 = 0, y1 = usr_mat[4], # 终点
+    length = 0.1, # 箭头顶端线段长度
+    angle = 20, # 箭头顶端角度
+    code = 2,  # 箭头画在终点（1=起点，2=终点，3=两端）
+)
+# 在箭头旁边加文字
+text(
+    x = usr_mat[2] - 0.3, y = 0.5, # 参照点
+    labels = "x", # 文字内容
+    adj = 0, # 相对参照点的对齐方式（0=左对齐/底部对齐，0.5=居中对齐，1=右对齐/顶部对齐，实际上可以是任何值，取决于追求的实际效果）
+    #* 也可以表示成一个向量(horiz,vert)，分别表示水平和垂直方向上的对齐方式
+)
+text(
+    x = 0.2, y = usr_mat[4] - 0.5, 
+    labels = "y", 
+    pos = 4, # 相对参照点的位置（1=下，2=左，3=上，4=右）
+    offset = .1, # 伸缩距离
+    #* pos参数常常搭配offset参数使用,相当于adj参数的作用,使用adj参数后,offset参数的影响可以忽略不计
+)
+# 在曲线旁边加标签
+text(v_mat[58], m_mat[58,1], expression(y == x), pos = 1, offset = 1,cex = 1.5)
+text(v_mat[22], m_mat[22,2], expression(y == x^2), pos = 4, cex = 1.5)
+text(v_mat[58], m_mat[58,3], expression(y == sqrt(x)), pos = 3, cex = 1.5)
+text(v_mat[2], m_mat[2,4], expression(y == frac(1,x)), pos = 4, cex = 1.5)
+text(v_mat[55], m_mat[55,5], expression(y == paste("ln(",x,")")), pos = 1, offset = .1,cex = 1.5)
+text(v_mat[18], m_mat[18,6], expression(y == e^x), pos = 1,cex = 1.5)
+text(v_mat[38], m_mat[38,7], expression(y == sin(x)), pos = 1,cex = 1.5)
+text(v_mat[50], m_mat[50,8], expression(y == cos(x)), pos = 1,cex = 1.5)
+
 
 
 

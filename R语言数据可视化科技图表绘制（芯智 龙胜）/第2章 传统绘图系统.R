@@ -15,6 +15,7 @@ options(width = 128) # 控制VS Code中R终端的显示宽度
 ## 十一、hist()函数
 ## 十二、image()函数
 ## 十三、matplot()函数
+## 十四、mosaicplot()函数
 
 
 ## 一、plot()函数
@@ -607,7 +608,15 @@ m_mat <- cbind(
 )
 colnames(m_mat) <- c("x","x^2","sqrt(x)","1/x","log(x)","e^x","sin(x)","cos(x)")
 # 绘制
-matplot(v_mat, m_mat, type = "o",pch = 20, col = 1:8, xlab = "X", ylab = "Y", main = "matplot示例",xlim =c(0,10),ylim = c(-3,10),lend = "butt")
+matplot(
+    v_mat, m_mat,
+    type = "o",pch = 20, col = 1:8,
+    main = "matplot示例",
+    xlab = "X", ylab = "Y",
+    xlim =c(0,10),ylim = c(-3,10),
+    lty = 1, # 默认值为1:6，循环使用（具体内容参看“三、barplot()函数”一节）
+    lend = 3 # 控制线头（line end）样式（0="round"（默认值），1="butt"，2="squre"，3又是"butt"，4又是"square"，以此类推，不能取负值）
+)
 # 取图形坐标范围
 usr_mat <- par("usr") # c(xmin, xmax, ymin, ymax)
 # 画x轴箭头
@@ -650,6 +659,70 @@ text(v_mat[18], m_mat[18,6], expression(y == e^x), pos = 1,cex = 1.5)
 text(v_mat[38], m_mat[38,7], expression(y == sin(x)), pos = 1,cex = 1.5)
 text(v_mat[50], m_mat[50,8], expression(y == cos(x)), pos = 1,cex = 1.5)
 
+## 十四、mosaicplot()函数
+# 马赛克图（mosaic plot）
+
+# 二维矩阵
+m_mosaic <- matrix(c(30, 10, 20, 40), nrow=2, dimnames = list(Gender = c("Male", "Female"), Preference = c("Yes", "No")))
+m_mosaic
+mosaicplot(m_mosaic)
+#* 图像呈现的格局和原矩阵的转置矩阵相同
+
+# （1）shade参数
+mosaicplot(m_mosaic,shade = TRUE) # 默认值为FALSE，TRUE等同于c(2,4)，表示以-4, -2, 0, 2, 4作为标准化残差的四个分割点
+mosaicplot(m_mosaic,shade = c(1,2,3,4,5)) # 最多可以选择5个整数
+
+# （2）color参数
+mosaicplot(m_mosaic,color = TRUE) # 当shade = FALSE时，color = TRUE才能发挥作用，默认使用灰色
+mosaicplot(m_mosaic,color = c("red","blue")) # 可以自定义颜色
+#* 同一颜色表示同一行
+
+# （3）off参数
+# 控制马赛克块之间的距离
+mosaicplot(m_mosaic,off = 5) # 如果给的数值数少于维度数，会循环扩展至维度数
+mosaicplot(m_mosaic,off = c(5,5))
+mosaicplot(m_mosaic,off = c(5,10))
+
+# （4）sort参数
+# 控制切割维度的先后顺序（1=行，2=列，3=第三维...）
+# 先将所有数据的总和视为一个整体
+mosaicplot(m_mosaic,sort = c(1,2)) # 先依据行切割，再依据列切割（默认值）
+mosaicplot(m_mosaic,sort = c(2,1)) # 先依据列切割，再依据行切割
+#* 要注意sort控制的是切割的对象，所谓的“行”“列”指的是原矩阵的行、列，切割对象的先后不影响矩阵的转置
+
+# （5）dir参数
+# 控制【最后呈现效果】中的切割方向（v=垂直切割，h=水平切割）
+mosaicplot(m_mosaic,dir = c("v","h")) # 默认值，矩阵转置
+mosaicplot(m_mosaic,dir = c("v")) # 如果设置的字符数少于维度数，会交替扩展至维度数，因此此处效果等同于上一条命令
+mosaicplot(m_mosaic,dir = c("v","v")) # 矩阵转置
+mosaicplot(m_mosaic,dir = c("h","h")) # 矩阵不转置
+mosaicplot(m_mosaic,dir = c("h","v")) # 矩阵不转置
+mosaicplot(m_mosaic,sort = c(2,1),dir = c("h","v")) # 矩阵不转置
+#* 可以发现，为了达到dir参数设置的效果，该参数搭配sort参数可能会阻止矩阵的转置
+
+# 三维数组
+m_mosaic2 <- array(c(20,30,40,30,40,10,30,60,10,15,10,5), dim=c(2,2,3), dimnames=list(Gender=c("M","F"), Preference=c("Yes","No"), Age=c("Young","Old","Other")))
+m_mosaic2
+mosaicplot(m_mosaic2)
+
+mosaicplot(m_mosaic2, shade = TRUE)
+mosaicplot(m_mosaic2, color = TRUE)
+mosaicplot(m_mosaic2,color = c("red","yellow","blue"))
+#* 同一个颜色表示同一个原矩阵的元素
+#// 当维数达到三维时,图像呈现的分布原理如下：（1）先将所有第三维度上的矩阵转置；（2）想象第一个转置矩阵的每一个元素的位置都确定了一个新矩形的位置；（3）由于每一个转置矩阵的元素都构成一一对应的关系，因此接下来只需要将剩余的每一个转置矩阵和第一个转置矩阵的对应元素按照从左到右的顺序放置在第一个转置矩阵的每一个元素的右侧即可
+#// 不难发现，新矩阵的个数就是原行数*原列数
+#* 上述旧注释部分暗含sort = c(1,2,3)的逻辑：以第一个转置矩阵的元素分布格局为基础，等同于先依据行和列分割数据，只是这依然没有明确是先依据行分割还是先依据列分割
+
+# 四维数组
+m_mosaic3 <- array(c(20,30,40,30,40,10,30,60,10,15,10,5,1:12), dim=c(2,2,3,2), dimnames=list(Gender=c("M","F"), Preference=c("Yes","No"), Age=c("Young","Old","Other"),A=c("A","B")))
+m_mosaic3
+
+mosaicplot(m_mosaic3, shade = TRUE)
+mosaicplot(m_mosaic3, color = TRUE)
+mosaicplot(m_mosaic3,color = c("red","yellow","blue","green")) # 即使颜色数等于维度数，也只用前两个颜色
+#* 此时只用前两个颜色来区分四维的不同序数来源的数据（此处是A和B）
+#// 当维数达到四维时，图像呈现的分布原理可以类比三维的情况
+#// 将上述三种情况放在一起看，就可以更清楚地看出分布原理：想象先是一维的横向排列的向量，升格到二维矩阵时，在向量的每一个元素【下方】添加新的元素（实际是矩阵相比向量多出的列数据），升格到三维数组时，又在每一个元素【右侧】添加新的元素（实际是三维数组相比矩阵多出的数据），升格到四维数组时，又在每一个元素【下方】添加新的元素（实际是四维数组相比三维数组多出的数据），以此类推，不断在原有数据的【下方】或者【右侧】添加新数据
 
 
 

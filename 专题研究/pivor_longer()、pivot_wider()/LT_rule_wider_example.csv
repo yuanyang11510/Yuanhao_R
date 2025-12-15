@@ -1,0 +1,9 @@
+﻿Type,PEM,Cond1,Reflex1,Cond2,Reflex2,Else,NatrlCls
+I < R,*h,[*u],f,,,h,[Rounded]
+I < R,*ɲ,[*i],ŋ,,,n,[?]
+R < I,*ou,[*p|*pʰ|*m],ua,,,u,[Labial]
+R < I,*u,[*p|*pʰ|*m|*k|*kʰ|*ŋ|*ʔ],u,,,ua,[Labial|Velar]
+R < I,*uon,[*p|*pʰ|*m|*k|*kʰ|*ŋ|*ʔ],uan,,,on,[Labial|Velar]
+R < I,*ut,[*k|*kʰ|*ŋ|*ʔ],ot,,,ut,[Velar]
+T < I,*C2,[*pʰ|*tʰ|*tsʰ|*kʰ|*m|*n|*l|*ɲ|*ŋ],C1,,,C2,[Aspirated|Sonorant]
+T < R,*D2,[*ak|*iak|*uak|*ok|*iok|*iuok],D1,,,D2,[-High&Back]

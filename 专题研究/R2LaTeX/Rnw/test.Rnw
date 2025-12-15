@@ -9,15 +9,49 @@ library(kableExtra)
 library(Hmisc) 
 data("mtcars")  # some example data 
 df <-mtcars[1:3, 1:6]
+
+df1 <- data.frame(
+  A = 1:3,
+  B = 4:6,
+  C = 7:9
+)
 @
 
 <<echo=F,results="asis">>=
-print(xtable(df,caption="Example with \\texttt{xtable}"), 
-booktabs=T, caption.placement="top")
-stargazer(df, summary=F, 
-title="Example with \\texttt{stargazer}")
-kable(df, booktabs = T, 
-caption = "Example with  \\texttt{kable}  and \\texttt{kableExtra}")
-latex(df, file = '', caption="Example with  \\texttt{Hmisc}")
+print(
+    xtable(
+        df,
+        caption="Example with \\texttt{xtable}" # 注意.Rnw中需要对反斜杠"\"进行转义，才会在生成的.tex文件中显示为单个反斜杠，但其他符号如大括号则不需要转义
+    ), 
+    booktabs=T, 
+    caption.placement="top"
+)
+
+stargazer(
+    df, 
+    summary=F, 
+    title="Example with \\texttt{stargazer}"
+)
+
+kable(
+    df, 
+    booktabs = T, 
+    caption = "Example with  \\texttt{kable}  and \\texttt{kableExtra}"
+)
+
+latex(
+    df, 
+    file = '', 
+    caption="Example with  \\texttt{Hmisc}"
+)
+
+print(
+    xtable(df1,caption = "ABC")
+)
+
+
+
+
 @
+
 \end{document}

@@ -1,4 +1,6 @@
 #! Others
+*.idea/
+*.vscode/
 *.xml
 *.iml
 

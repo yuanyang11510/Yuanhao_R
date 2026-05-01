@@ -3,23 +3,37 @@ library(rlang) # 提供data_sym()、data_syms()命令
 
 ## 以下总结的内容获得了ChatGPT的帮助
 
+# 两个mutate()环境中的术语:
+# 赋值表达式左边（Left-Hand Side，LHS）
+# 赋值表达式右边（Right-Hand Side，RHS）
+
 df1 <- data.frame(A = 1:3)
 df2 <- data.frame(A = 1:3,B = 3:1)
 
+#* （一）.data[[x]]
+
+
 #* （一）get()
-# （1）get()属于R的基础函数，用于在全局环境中通过字符串格式的变量名（variable name）查找变量（variable）的值（value）
+# （1）get()属于R的基础函数，用于在全局环境中通过字符串格式的变量名（variable name）查找变量（variable）的值（value）。
 A <- 999 # 将值999赋值给变量A，变量名为字符串格式的"A"
 get("A") # 返回999
 
-# （2）但更复杂的情况是“动态变量名”：将一个变量名作为值赋值给另一个变量，通过这个变量来查找存储在其中的变量名所对应的变量的值，这种做法在构造函数中相当常见。
+# （2）但更复杂的情况是将一个变量名作为值赋值给另一个变量，通过这个变量来查找存储在其中的变量名所对应的变量的值，这种做法的典型代表就是设计函数中的“动态变量名”问题。
 x <- "A" # 将变量名"A"作为值赋值给变量x
 A <- 999 # 将值999赋值给变量A
 get(x) # 返回999，但如果没有A <- 999，则会报错，因为该变量没有值
 
+# 在涉及“动态变量名”的时候，可以在RHS的位置上（对mutate()函数来说）使用.data[[x]]的形式来引用数据框中的列：
+df1 %>% mutate(B = .data[[x]]) # 创设一个新列B，将A列的内容赋值给该列
+df1 %>% filter(.data[[x]] > 1) # 从数据框中筛选出A列的内容大于1的行
+# 但是.data[[x]]无法放在LHS的位置上来为数据框中的列赋值，以下命令会报错：
+# df1 %>% mutate(.data[[x]] = 4:6)
+# 解决办法是使用!!sym(x)搭配":="来为数据框中的列赋值，见下文（二-3）的介绍。
+
 # （3）在mutate()和filter()当中，存在数据掩码（data mask）机制，创建一个优先于全局环境的局部环境，在该环境中，列名和列内容会分别作为变量和值一一对应，因此不管是否存在A <- 999，mutate()和filter()当中的get(x)都会返回x的值（即"A"）作为列名的列内容。
-# 尤其注意没有A <- 999时，get(x)在全局环境中会报错，但在mutate()和filter()环境中可以正常运行，因为mutate()和filter()做了一步相当于A <- 999的操作：将A列的内容赋值给了A这个变量。
+# 尤其注意没有A <- 999时，get(x)在全局环境中会报错，但在mutate()和filter()环境中可以正常运行，因为mutate()和filter()做了一步相当于A <- 999的操作：将A列的内容（类型是向量）赋值给了A这个变量。
 df1 %>% mutate(copy_A = get(x)) # 创设一个新列copy_A，将A列的内容赋值给该列
-# get()只能出现在赋值表达式右边（Right-Hand Side，RHS）的位置，见下文（二-3）的介绍。
+# get()只能出现在RHS的位置，见下文（二-3）的介绍。
 df1 %>% filter(get(x) > 1) # 从数据框中筛选出A列的内容大于1的行
 # filter()函数中输入的是一个逻辑值判断表达式，没有LHS和RHS的区分，get(x) > 1也可以写成1 < get(x)，结果相同
 
@@ -42,7 +56,7 @@ A2 <- "B"
 df2 %>% filter(get(x,envir = .env) > 1)
 
 # （5）与此相关的一个细节是：
-# mutate()函数中，赋值表达式左边（Left-Hand Side，LHS）位置的用来表示列的列名既可以接受字符串型，也可以接受符号型（symbol），前者是一种数据类型（data type），后者是一种语言对象（language object），RHS位置则只能接受符号型，字符串型的数据会被作为值填充到列中。
+# mutate()函数中，LHS位置的用来表示列的列名既可以接受字符串型，也可以接受符号型（symbol），前者是一种数据类型（data type），后者是一种语言对象（language object），RHS位置则只能接受符号型，字符串型的数据会被作为值填充到列中。
 df2 %>% mutate("C" = 4:6) # 创设一个新列C，将4、5、6赋值给该列
 df2 %>% mutate(C = 4:6) # 结果和上一条命令相同
 df2 %>% mutate(C = A) # 创设一个新列C，将A列的内容赋值给该列
@@ -62,7 +76,7 @@ eval(sym(x)) # 返回999，前提是存在A <- 999，该命令结果和get(x)相
 df1 %>% mutate(B = !!sym(x)) # 创设一个新列B，将A列的内容赋值给该列
 df1 %>% filter(!!sym(x) > 1) # 从数据框中筛选出A列的内容大于1的行
 
-# （3）filter()函数中，可以通过LHS位置的!!sym()搭配":="来为数据框中的列赋值。
+# （3）mutate()函数中，可以通过LHS位置的!!sym()搭配":="来为数据框中的列赋值。
 df1 %>% mutate(!!sym(x) := 3:1) # 将A列的内容替换为3、2、1，该条命令相当于mutate(A = 3:1)
 df1 %>% mutate(!!x := 3:1) # sym()可以省略，结果和上一条命令相同，此时!!不发挥作用，!!x相当于"A"，该条命令相当于mutate("A" = 3:1)
 # LHS位置的字符串型数据和符号型数据都可以用来表示列名，见前文（一-5）的介绍，因此上述两条命令结果相同。
@@ -104,8 +118,19 @@ df2 %>% mutate(C = rowMeans(across(any_of(y)))) # 创设一个新列C，将数�
     # ℹ See <https://tidyselect.r-lib.org/reference/faq-selection-context.html> for details.
     # Run `rlang::last_trace()` to see where the error occurred.
 
-# （2）前两条命令相当于select("A")、select("A","B")，而select()函数当中字符串和符号都可以发挥作用，因此sym()在select()中也能发挥作用，以下命令相当于select(A)。
+# 在选择函数中也可以使用.data[[x]]的形式来引用数据框中的列：
+df2 %>% select(.data[[x]]) # 从数据框的A、B两列中选出A列
+# 但是会警报：
+    # Warning message:
+    # Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
+    # ℹ Please use `all_of(var)` (or `any_of(var)`) instead of `.data[[var]]`
+    # This warning is displayed once per session.
+    # Call lifecycle::last_lifecycle_warnings() to see where this warning was generated.
+# 因此推荐使用all_of()、any_of()函数。
+
+# （2）使用all_of()、any_of()函数选择列时，相当于使用select("A")、select("A","B")，而select()函数当中字符串和符号都可以发挥作用，因此sym()、!!sym()在select()中也能发挥作用，以下命令相当于select(A)。
 df2 %>% select(sym(x)) # 结果和select(all_of(x))相同
+df2 %>% select(!!sym(x))
 
 #~ !!!syms(y)将包含A、B（符号）的列表展开为A、B（符号），以下命令相当于select(A,B)。
 df2 %>% select(!!!syms(y)) # 结果和select(all_of(y))相同
@@ -118,7 +143,7 @@ df2 %>% select(!!!data_syms(y))
 # 细节需要展开讨论：
 # （3.1）如果不存在A <- 999，由于全局环境中不存在A变量对应的值，因此get(x)会报错，select(get(x))也就会报错。 
 # （3.2）如果存在A <- 999，select(get(x))按照逻辑会选择数据框中列名为"999"的列，但是由于A的值999是数值型，而列名"999"是字符串型，因此即使数据框中存在列名为"999"的列，select(get(x))也会报错。
-# （3.3）以下命令唯一可以成立的情况是：数据框中存在列名为"999"的列，并且全局环境中存在z <- "B、B <- "999"
+# （3.3）以下命令唯一可以成立的情况是：数据框中存在列名为"999"的列，并且全局环境中存在z <- "B"、B <- "999"
 df3 <- df2 %>% mutate("999" = 4:6)
 z <- "B"
 B <- "999"
@@ -130,3 +155,16 @@ df2 %>% select(get(z))
 # （3）在mutate()、filter()等函数当中使用all_of()、any_of()大多数情况下无法达到和使用get()、!!sym()相同的结果，因为all_of()、any_of()无法通过搭配!!来引用列内容，但是存在一个例外情况：当all_of()搭配!!和":="来为数据框中的列赋值时，all_of()的结果是一个字符串型数据，因此相当于是使用!!搭配":="来为数据框中的列赋值，但这也不是常见做法。
 df2 %>% mutate(!!all_of(x) := 4:6) # 该命令相当于mutate(!!x := 4:6)
 # （4）在设计函数时，all_of()、any_of()函数在用于选择列时是必须使用的，而get()、sym()、!!sym()函数在RHS的位置上则可以用.data[[x]]的形式替代，在LHS的位置上则只能使用!!sym(x)或者!!x搭配":="来为数据框中的列赋值。
+
+#* （五）rename()函数
+# 观察以下命令的结果：
+# df1 %>% rename(B = get(x)) # 报错，说明rename()没有数据掩码机制，get(x)会直接返回变量A的值999（如果存在的话）
+df1 %>% rename(B = all_of(x)) # 正常运行，将A替换为B
+df1 %>% rename(B = sym(x)) # 同上
+df1 %>% rename(B = !!sym(x)) # 同上
+df1 %>% rename(B = .data[[x]]) # 正常运行，但警报： 
+    # Warning message: Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0. 
+    # ℹ Please use all_of(var) (or any_of(var)) instead of .data[[var]] This warning is displayed once per session. 
+    # Call lifecycle::last_lifecycle_warnings() to see where this warning was generated. 
+# 上述结果的特点和select()函数一致，说明rename()也属于选择函数，因此推荐使用all_of()、any_of()函数。ChatGPT称：“rename() 是 tidyselect + tidy eval 混合机制。”
+

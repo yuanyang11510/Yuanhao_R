@@ -167,5 +167,12 @@ df1 %>% rename(B = .data[[x]]) # 正常运行，但警报：
     # Warning message: Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0. 
     # ℹ Please use all_of(var) (or any_of(var)) instead of .data[[var]] This warning is displayed once per session. 
     # Call lifecycle::last_lifecycle_warnings() to see where this warning was generated. 
-# 上述结果的特点和select()函数一致，说明rename()也属于选择函数，因此推荐使用all_of()、any_of()函数。ChatGPT称：“rename() 是 tidyselect + tidy eval 混合机制。”
+# 上述结果的特点和select()函数一致，说明rename()也属于选择函数，因此推荐使用all_of()、any_of()函数。
+x1 <- "B"
+df1 %>% rename(!!sym(x1) := A) # 正常运行，将列名A替换为B
+df1 %>% rename(!!x1 := A) # 同上
+# df1 %>% rename(get(x1) = A) # 报错
+# df1 %>% rename(sym(x1) = A) # 报错
+# 上述结果的特点和mutate()函数一致，说明rename()也属于计算函数，因此在LHS的位置上应该使用!!sym()搭配":="来为数据框中的列替换列名。
+# ChatGPT称：“rename() 是 tidyselect + tidy eval 混合机制。”
 

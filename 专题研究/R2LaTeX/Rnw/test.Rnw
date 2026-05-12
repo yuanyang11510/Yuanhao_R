@@ -1,12 +1,18 @@
 \documentclass{article}
 \usepackage[margin=1em,paperheight=8cm,paperwidth=12cm]{geometry}  
 \usepackage{booktabs,lipsum}
+
 \begin{document}
+
 <<echo=F,message=F,warning=F,comment="">>=
+library(tidyverse) # 提供read_csv()函数
+library(readxl) # 提供read_xlsx()函数
+
 library(xtable)
 library(stargazer)
 library(kableExtra) 
 library(Hmisc) 
+
 data("mtcars")  # some example data 
 df <-mtcars[1:3, 1:6]
 
@@ -15,42 +21,68 @@ df1 <- data.frame(
   B = 4:6,
   C = 7:9
 )
+
+df2 <- read_xlsx("../XLSX/test.xlsx",sheet = 1)
+df3 <- read_xlsx("../XLSX/test.xlsx",sheet = 2)
+
 @
 
 <<echo=F,results="asis">>=
+
+# R的knitr包会将.Rnw文件中的代码块内容转换为LaTeX代码，并决定是否调用TeX编译器编译该.tex文件从而得到.pdf文件，本质上是将R中的字符串内容的打印结果作为供TeX编译器编译的代码。可以表示为：[1] .rnw --> [2] .tex (--> [3] .pdf)，[1] --> [2]的步骤需要同时考虑R的字符串打印规则和LaTeX的代码格式，关于R的打印规则，只需要记住一条：“\”在R中需要用“\\”才能打印出来。关于LaTeX的代码格式，下面分三种情况讨论：
+    # （1）如果涉及LaTeX中的普通文本，直接在.Rnw文件中写成普通文本即可，比如.Rnw文件中的“ABC”会直接打印为.tex文件中的“ABC”。
+    # （2）如果涉及LaTeX中的普通命令，比如“\texttt{}”，根据R的打印规则，需要在.Rnw文件中写成“\\texttt{}”，会打印为.tex文件中的“\texttt{}”。
+    # （3）如果涉及LaTeX中需要转义的特殊字符，比如“{}”、“_”、“\”，这些特殊字符需要用LaTeX的代码表示为“\{”、“\}”、“\_”、“\textbackslash{}”才能在[2] --> [3]的步骤中打印出来，这就将问题（3）转换为了问题（2），需要按照（2）的规则在.Rnw文件中写成“\\{”、“\\}”、“\\_”、“\\textbackslash{}”。
+# 总而言之，只要分清需要将R的字符串内容转换为上述情况中的哪一种，进行相应的处理即可。
+
+# xtable：df
 print(
     xtable(
         df,
-        caption="Example with \\texttt{xtable}" # 注意.Rnw中需要对反斜杠"\"进行转义，才会在生成的.tex文件中显示为单个反斜杠，但其他符号如大括号则不需要转义
+        caption="Example with \\texttt{xtable}"
     ), 
     booktabs=T, 
     caption.placement="top"
 )
 
+# stargazer：df
 stargazer(
     df, 
     summary=F, 
     title="Example with \\texttt{stargazer}"
 )
 
+# kable：df
 kable(
     df, 
     booktabs = T, 
     caption = "Example with  \\texttt{kable}  and \\texttt{kableExtra}"
 )
 
+# Hmisc：df
 latex(
     df, 
     file = '', 
     caption="Example with  \\texttt{Hmisc}"
 )
 
+# xtable：df1
 print(
     xtable(df1,caption = "ABC")
 )
 
+# xtable：df2
+print.xtable(
+    xtable(df2,caption = "XLSX\\_\\{1\\}"),
+    include.rownames = FALSE # 默认会打印行名列，需要设置为FALSE才能不打印行名列
+)
 
-
+# xtable：df3
+# “print.xtable”可以简写为“print”，不过参数结构实际仍然和print.xtable()一样（比如inclue.rownames参数其实是print.xtable()而非print()的参数）
+print(
+    xtable(df3,caption = "XLSX\\textbackslash{}2"),
+    include.rownames = FALSE
+)
 
 @
 

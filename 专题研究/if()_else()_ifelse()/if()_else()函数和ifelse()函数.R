@@ -1,5 +1,7 @@
 # if()/else()函数和ifelse()函数
 
+## 关于ifelse()函数和if_else()函数的区别，见文件“匿名函数和管道符.R”。
+
 # 一、ifelse()函数可以实现向量化，而if()函数和else()函数不可以
     # 定义一个包含ifelse()函数的函数
     func.ifelse.1 <- function(x)

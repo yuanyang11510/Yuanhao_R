@@ -203,9 +203,10 @@ map(
     #* 结果得到2:4
     # （b）ifelse(tmp, tmp < 3, "< 3")
     #* test参数为tmp（2:4），恒为真，因此始终返回yes参数的值，即2:4 < 3的结果，即TRUE、FALSE、FALSE
-    #* 此处还涉及ifelse()函数的yes/no参数为向量时的处理：函数会将yes/no代表的向量和test参数代表的向量按长度对齐，然后在yes参数和no参数中各自独立地逐项选择符合条件的值。
-    #* 如果yes/no的向量长度比test参数的向量长度短，会遵循“向量回收机制”（vector recycling），自动将长度较短的向量按之前的循环规律补全，比如下面这个命令会返回TRUE、TRUE、FALSE、[TRUE]、FALSE、TRUE、[FALSE]，第四个位置的TRUE和最后一个位置的FALSE是根据yes/no参数之前的内容各自独立补全的。
-ifelse(c(T,T,T,T,F,F,F),c(T,T,F),c(F,T))
+    #* 此处还涉及ifelse()函数的yes/no参数为向量时的处理：如果test参数的长度比yes/no参数的长度短，则以test参数的长度为准进行取值，比如下面这条命令会返回"A"、"F"、"C"，分别来自yes参数的第一项、no参数的第二项、yes参数的第三项。
+ifelse(c(T,F,T),c("A","B","C","D"),c("E","F","G","H"))
+    #* 如果yes/no的向量长度比test参数的向量长度短，会遵循“向量回收机制”（vector recycling），自动将长度较短的向量根据之前的内容循环补全，然后进行取值。比如下面这个命令会返回"A"、"B"、"C"、["A"]、"D"、"E"、["D"]，第四个位置的"A"和最后一个位置的"D"是根据yes/no参数之前的内容补全的。
+ifelse(c(T,T,T,T,F,F,F),c("A","B","C"),c("D","E"))
 
 # 但是下面这个例子：
 # map(
@@ -238,18 +239,36 @@ ifelse(c(T,T,T,T,F,F,F),c(T,T,F),c(F,T))
     #`` ! `condition` must be a logical vector, not the number 1.
 # 这是因为if_else()函数严格要求test参数必须是逻辑值，而ifelse()函数则没有这个要求，可以接受数值型的test参数，并将其当作TRUE处理。
 
-# 另外，if_else()函数在遇到yes/no参数为向量时的处理和ifelse()函数不同：if_else()函数要求yes/no参数的长度必须和test参数的长度相同，否则会报错，因此也就不存在“向量回收机制”。另外，if_else()函数在yes/no参数中的取值机制也和ifelse()函数不同：if_else()函数并不是像ifelse()函数那样从yes参数和no参数中各自独立地逐项选择符合条件的值，而是在test参数与yes/no参数的长度严格对齐地条件下，将yes/no参数的值整体配对，逐项选择符合条件的值，比如下面这个命令会返回：TRUE、TRUE、FALSE、FALSE、FALSE、FALSE、TRUE，分别对应yes参数中的第1、2、3项，no参数中的第4项，yes参数中的第5项，no参数中的第6、7项。
-if_else(c(T,T,T,F,T,F,F),c(T,T,F,F,F,T,F),c(T,T,F,F,T,F,T))
+# 另外，if_else()函数在遇到yes/no参数为向量时的处理和ifelse()函数不同：if_else()函数要求yes/no参数的长度必须和test参数的长度相同，否则会报错，因此也就不存在“向量回收机制”。
 
-# if_else(c(T,T,T,T,F,F,F),c(T,T,F),c(F,T))
-# 上述命令会报错：
-    # Error in `if_else()`:
-    #· ! `true` must have size 7, not size 3.
-# if_else(c(T,T,T,T,F,F,F),c(T,T,F,T,F,T,F),c(F,T))
+# 请看下面这个例子：
+df <- data.frame(
+  A = c("A","A","B","B"),
+  B = c("a","b","c","d")
+)
 
-# 上述命令会报错：
-    # Error in `if_else()`:
-    #`` ! `false` must have size 7, not size 2.
+df %>% group_by(A) %>% mutate(C = n()) # C列返回每个分组的成员数
+
+# 第一组：
+df %>% group_by(A) %>% mutate(C = ifelse(n()==1,"n = 1","n != 1")) # 如果分组成员数量为1，C列返回"n = 1"，否则返回"n != 1"
+df %>% group_by(A) %>% mutate(C = if_else(n()==1,"n = 1","n != 1")) # 结果和ifelse()函数相同
+
+# 第二组：
+df %>% group_by(A) %>% mutate(C = ifelse(n()==1,paste(A,B),paste(B,A))) # 预期的效果：如果分组成员数量为1，C列返回分组成员的A列和B列的内容拼接成的字符串，否则返回分组成员的B列和A列的内容拼接成的字符串
+#* ifelse()函数虽然没有报错，但是可以发现，C列的第二行和第四行并没有出现期待的"b A"和"d B"，而是重复了前一行的内容"a A"和"c B"。
+df %>% group_by(A) %>% mutate(C = if_else(n()==1,paste(A,B),paste(A,B))) 
+# 结果会报错：
+    # Error in `mutate()`:
+    # ℹ In argument: `C = if_else(n() == 1, "a", paste(A, B))`.
+    # ℹ In group 1: `A = "a"`, `B = "b"`.
+    # Caused by error in `if_else()`:
+    #· ! `false` must have size 1, not size 2.
+#* 以上第二组中的ifelse()函数虽然没有报错，但没有达到期待的效果；if_else()函数则会直接报错。这是因为“n()”不是向量化命令，其结果是一个标量，因此test参数中“n() == 1”的值也只是一个逻辑值标量，而no参数中的“paste(A,B)”的结果是一个向量（但注意，对分组成员使用paste(collapse = "...")函数的结果则是一个标量）。现在加入分组条件“group_by(A)”，在df的两个分组中，n()的值均为2，因此test参数“n() == 1”的值均为FALSE，是标量，指向no参数，而两个分组中paste(B,A)的值都是一个长度为2的向量：c("a A","b A")、c("c B","d B")，这就和test参数的长度1不一致，结果导致了if_else()函数报错，ifelse()函数的情况下虽然没有报错，但是因为test参数的长度比no参数的长度短，因此以test参数的长度为准进行取值，导致在两个分组中都只能取到no参数中的第一项，即"a A"和"c B"，然后再通过mutate()函数的“向量回收机制”将前一行内容自动扩展到后面的一行。因此ifelse()函数相比if_else()函数可能会掩盖一些潜在的逻辑错误。
+
+# 上面第二组的命令如果想要达到预期的效果，就不能在向量化的ifelse()函数和if_else()函数内部使用非向量化的n()命令，而应该在if()...else()的结构中使用n()命令：
+df %>% group_by(A) %>% mutate(C = if(n()==1) paste(A,B) else paste(B,A))
+
+## 实践中（比如在Corresp2Change()函数中）出现了在ifelse()/if_else()函数中使用n()命令的结构，但是没有报错，也达到了预期的效果，是因为像上述第一组中的命令一样，yes/no参数的值是两个字符串，长度均为1，恰好等于n()命令的值的长度。
 
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -365,13 +384,13 @@ df1_longer_modified <- df1 %>% separate_wider_delim(
         names_to = "Origin",
         names_transform = list(
             Origin = ~{
-                col_name_1 <- str_remove_all(.x, "_\\d+")
-                col_name_2 <- if_else(
-                    col_name_1 == "Proto",
-                    col_name_1,
-                    paste0(col_name_1," < ","Proto")
+                origin_1 <- str_remove_all(.x, "_\\d+")
+                origin_2 <- if_else(
+                    origin_1 == "Proto",
+                    origin_1,
+                    paste0(origin_1," < ","Proto")
                 )
-                return(col_name_2)
+                return(origin_2)
             }
         )
     )
@@ -452,33 +471,33 @@ df2 <- data.frame(
     A = c("a{x}","(b)","[c]")
 )
 
-df2_replaced <- df2 %>% 
+df2_deleted <- df2 %>% 
     mutate(
         across(
             A,
-            ~str_replace_all(.x,"\\{.+\\}","") %>% 
+            ~str_remove_all(.x,"\\{.+\\}") %>% 
                 str_replace_all("^[\\(\\[](.+)[\\)\\]]$","\\1")
         )
     )
 ## 上述匿名函数后接管道符的结构之所以可以正常运行，是因为左边的结果恰好是右边str_replace_all()函数的第一个参数。
 
 # 为了避免同时使用管道符，可以将上述结构改写为：
-df2_replaced_modified_1 <- df2 %>% 
+df2_deleted_modified_1 <- df2 %>% 
     mutate(
         across(
             A,
             ~{
-                replace_1 <- str_replace_all(.x,"\\{.+\\}","")
-                replace_2 <- str_replace_all(replace_1,"^[\\(\\[](.+)[\\)\\]]$","\\1")
-                return(replace_2)
+                delete_1 <- str_remove_all(.x,"\\{.+\\}")
+                delete_2 <- str_replace_all(delete_1,"^[\\(\\[](.+)[\\)\\]]$","\\1")
+                return(delete_2)
             }
         )
     )
 
 # 上述结构也可以改写成只是用mutate()函数的结构，更加简单：
-df2_replaced_modified_2 <- df2 %>% 
+df2_deleted_modified_2 <- df2 %>% 
     mutate(
-        A = str_replace_all(A,"\\{.+\\}","") %>%
+        A = str_remove_all(A,"\\{.+\\}") %>%
             str_replace_all("^[\\(\\[](.+)[\\)\\]]$","\\1")
 
     )
@@ -490,7 +509,7 @@ df3 <- data.frame(
     A = c("1","","1+2+3")
 )
 # 先看直接通过mutate()函数中使用管道符的结构：
-df3_separated <- df3 %>% 
+df3_numeric <- df3 %>% 
     mutate(
         A = if_else(
             str_detect(A,"\\+"),
@@ -509,7 +528,7 @@ df3_separated <- df3 %>%
     # ℹ In argument: `across(...)`.
     # Caused by warning in `ifelse()`:
     #· ! NAs introduced by coercion 
-df3_separated_warning_1 <- df3 %>% 
+df3_numeric_warning_1 <- df3 %>% 
     mutate(
         across(
             A,
@@ -525,7 +544,7 @@ df3_separated_warning_1 <- df3 %>%
     )
 # 结果变成：1、0、NA
 ## 这是因为如果在across()函数中使用管道符，across()函数创设的环境会阻碍管道符对右边函数中占位符的识别，此时“.”会被识别为across()环境中匿名函数的参数“.x”（当然也可以写成“.”），也就是across()函数的第一个参数对应的列内容，因此，“~”和管道符之间的部分实际不会发挥作用，上述命令实际上等同于：
-df3_separated_warning_2 <- df3 %>% 
+df3_numeric_warning_2 <- df3 %>% 
     mutate(
         across(
             A,
@@ -537,22 +556,22 @@ df3_separated_warning_2 <- df3 %>%
 ## 而（四-2）的例子中虽然也在across()函数中使用了管道符，但由于在这个例子中没有出现占位符，因此可以正常运行。总而言之，应该尽量避免在across()函数中使用管道符。
 
 # 如果想用across()函数中的匿名函数完成上述任务，可以将上述结构改写为：
-df3_separated_modified <- df3 %>% 
+df3_numeric_modified <- df3 %>% 
     mutate(
         across(
             A,
             ~{
-                replace_1 <- if_else(
+                numeric_1 <- if_else(
                     str_detect(.x,"\\+"),
                     str_replace_all(.x,".+\\+(.+)","\\1"),
                     .x
                 )
-                replace_2 <- if_else(
-                    replace_1 == "",
+                numeric_2 <- if_else(
+                    numeric_1 == "",
                     0,
-                    as.numeric(replace_1)
+                    as.numeric(numeric_1)
                 )
-                return(replace_2)
+                return(numeric_2)
             }
         )
     )

@@ -37,7 +37,7 @@ df1 %>% mutate(copy_A = get(x)) # 创设一个新列copy_A，将A列的内容赋
 df1 %>% filter(get(x) > 1) # 从数据框中筛选出A列的内容大于1的行
 # filter()函数中输入的是一个逻辑值判断表达式，没有LHS和RHS的区分，get(x) > 1也可以写成1 < get(x)，结果相同
 
-# （4）如果要强制在mutate()环境中使用全局环境，可以使用将get()的参数envir设置为.env进行引用
+# （4）如果要强制在mutate()环境中使用全局环境，可以将get()的参数envir设置为.env进行引用
 # 如果没有A <- 999，以下命令会报错，因为全局环境中A变量名没有被赋值
 # 如果存在A <- 999，则new列会被赋值：999,999,999
 df1 %>% mutate(new = get(x, envir = .env))
@@ -72,7 +72,7 @@ x <- "A"
 sym(x) # 返回A（符号）
 eval(sym(x)) # 返回999，前提是存在A <- 999，该命令结果和get(x)相同
 
-# （2）需要通过!!来让mutate()和filter()函数引用这些符号对应的列，在mutate()和filter()环境中，!!sym()和get()的结果相同，但两者的运作机制不同：get()是在mutate()和filter()函数已经将列名和列内容配对的基础上，引用列名代表的列内容，而!!sym()是让mutate()和filter()函数引用符号对应的列。
+# （2）需要通过!!来让mutate()和filter()函数引用这些符号对应的列（可以近似理解成上文的eval()，但!!只在tidyverse的数据掩码环境中有效），在mutate()和filter()环境中，!!sym()和get()的结果相同，但两者的运作机制不同：get()是在mutate()和filter()函数已经将列名和列内容配对的基础上，引用列名代表的列内容，而!!sym()是让mutate()和filter()函数引用符号对应的列。
 df1 %>% mutate(B = !!sym(x)) # 创设一个新列B，将A列的内容赋值给该列
 # df1 %>% mutate(B = sym(x)) # 该命令会报错
 df1 %>% filter(!!sym(x) > 1) # 从数据框中筛选出A列的内容大于1的行

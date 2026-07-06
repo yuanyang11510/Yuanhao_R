@@ -24,7 +24,8 @@ PCM_original
 *m{v;m}_1+2
 *m{v;m}_1
 *m{v;m}_2
-*mʰ{m}
+*mʰ{m;h}
+*mʰ{m;h}
 *n{l;n;z}_1+2+3
 *n{l;n;z}_1+2+3
 *n{l;n;z}_2
@@ -48,7 +49,7 @@ PCM_original
 *ie{i;ia}
 *ie{i;ia}
 *ia{ia}
-*io{io}
+*yo{io}
 *ue{ue}
 *ua{ua}
 *uo{ou}
@@ -89,7 +90,7 @@ PCM_original
 *iɑp{ia}_1
 *iɑp{ia}_2
 *iem{iam}
-*(iep){iap}
+(*iep){iap}
 *ən{an}
 *ət{at}
 *an{ai}_1
@@ -112,9 +113,9 @@ PCM_original
 *ot{uai;ue}_yot{uai;ue}_2
 *ot{uai;ue}_yot{uai;ue}_3
 *ot{uai;ue}_yot{uai;ue}_3
-*[uot]{ue}_uok{ue}_1
-*[uot]{ue}_uok{ue}_1
-*[uot]{ue}_uok{ue}_2
+[*uot]{ue}_uok{ue}_1
+[*uot]{ue}_uok{ue}_1
+[*uot]{ue}_uok{ue}_2
 *ok{o}_1
 *ok{o}_2
 *in{in}

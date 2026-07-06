@@ -20,7 +20,7 @@ df_modify <- left_join(
 ) %>% 
   select(PCM_modify)
 
-write_csv(df_modify,"./Result/txt_modify.csv")
+# write_csv(df_modify,"./Result/txt_modify.csv")
 
 # ----------------------------------------------------------------------------
 

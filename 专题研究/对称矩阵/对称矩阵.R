@@ -21,6 +21,27 @@ outer(
     as_tibble() %>% 
     mutate(ID = colnames(.),.before = everything()) # 巧妙利用rownames和colnames的对称性添加ID列
 
+# outer()函数的X参数和Y参数一般输入的是简单的向量，但是也可以输入列表，这个时候要注意FUN参数的函数需要保证对这些列表参数实现向量化操作。
+tbl_list <- tibble(
+    A = 1:2,
+    B = list(c("a","b"),c("c","d"))
+)
+
+outer(
+    tbl_list$B,tbl_list$B,
+    FUN = function (x,y) {
+        # 用map2()函数对列表参数实现向量化操作
+        map2(
+            x,y,
+            function (x,y) {
+                append(x,y) %>% 
+                unlist() %>% 
+                str_c(collapse = ",")
+            }
+        )
+    }
+)
+
 # 方法二：使用cross_join()函数搭配pivot_wider()函数
 #* 我们将这种方法下通过cross_join()函数生成的笛卡尔积数据框中除去数据之外的内容相同的两列为rownames列和colnames列，对应最后生成的对称矩阵的行名和列名，方便后续讨论。
 cross_join(tbl,tbl) %>% 

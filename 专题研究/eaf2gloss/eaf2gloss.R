@@ -1,5 +1,5 @@
 # 如果本地还没有安装这三个包，运行以下命令
-# install.packages(c("tidyverse","readelan","openxlsx))
+# install.packages(c("tidyverse","readelan","openxlsx"))
 
 # 加载包
 library(tidyverse)

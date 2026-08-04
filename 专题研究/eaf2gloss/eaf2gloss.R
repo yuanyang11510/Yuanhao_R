@@ -1,12 +1,14 @@
 # 如果本地还没有安装这两个包，运行以下命令
-# install.packages(c("tidyverse","readelan"))
+# install.packages(c("tidyverse","readelan","openxlsx))
 
 # 加载包
 library(tidyverse)
 library(readelan)
+library(openxlsx)
 
 # 导入.eaf文件，每次只需要将"./Source/"之后的内容修改为当前处理的文件名即可，形式为"XXX.eaf"
-tbl_eaf <- read_eaf("./Source/ybe202408200201-int_20260803.eaf") 
+# 记得设置fill_times = FALSE
+tbl_eaf <- read_eaf("./Source/ybe202408200201-int_20260803.eaf",fill_times = FALSE) 
 
 # 处理数据
 tbl_gloss <- tbl_eaf %>% 
@@ -26,5 +28,8 @@ tbl_gloss <- tbl_eaf %>%
   mutate(across(everything(),~replace_na(.x,"")))
 
 # 导出.csv文件,输出的文件名可以通过"./Result/"之后的内容修改，形式为"XXX.csv"
-write_excel_csv(tbl_gloss,"./Result/sample.csv")
+# 生成的.csv文件里“-”开头的内容会被当做公式，从而显示为“#NAME?”，不方便处理
+# 生成的.xlsx文件没这个问题
+# write_excel_csv(tbl_gloss,"./Result/sample.csv")
+write.xlsx(tbl_gloss,"./Result/sample.xlsx")
 

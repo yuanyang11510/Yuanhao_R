@@ -1,0 +1,3 @@
+-从"eaf2gloss.Rproj"文件进入，点击左上角File-OpenFile，选择文件eaf2gloss.R，运行代码。
+-需要处理的.eaf文件放置在"Source"文件夹中。 
+-导出的.csv文件在"Result"文件夹中。

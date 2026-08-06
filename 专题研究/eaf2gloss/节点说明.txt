@@ -1,0 +1,61 @@
+# "participant"  （说话人）
+# "a_new"   （数据来源）
+
+如果某个节点有下层节点，.eaf文件中的ANNOTATION_ID（以下称a值）会以“a+数字+下划线_+后缀”的形式表现。
+如果某个节点没有下层节点，a值会以“a+数字”的形式表现。
+下文如果不明确说明，默认有下层节点。
+
+一层节点（句子空槽位）：
+# "Yang Xuefang_phrase-txt-zh-CN"（句子空槽位1，一般为空，仅有一处有内容：kʰɛiʂʐ̩ ma，但最重要的功能是联系起二层节点中“Yang Xuefang”开头的各节点，并且标记了时间戳）
+# "Zhencao Zhong_phrase-txt-zh-CN"（句子空槽位2，仅有一处，内容：n，但最重要的功能是联系起二层节点中“Zhencao Zhong”开头的各节点，并且标记了时间戳）
+# "interlinear-text-date-created-en"（2026-08-03 09:19:16.336，没有下层节点）
+# "interlinear-text-date-modified-en"（2026-08-03 09:19:16.336，没有下层节点）
+# "interlinear-text-title-en"（ybe202408200201，没有下层节点）
+		二层节点（句子标注+词空槽位）：
+		# "Yang Xuefang_phrase-segnum-en"（句子编号，没有下层节点）
+		# "Yang Xuefang_phrase-txt-ybe"（句子形式，没有下层节点）
+		# "Yang Xuefang_phrase-gls-en"（句子英文翻译，没有下层节点）
+		# "Yang Xuefang_phrase-gls-zh-CN"（句子中文翻译，没有下层节点）
+		# "Zhencao Zhong_phrase-segnum-en"（仅有一处，内容：2，没有下层节点）
+		# "Zhencao Zhong_word-txt-zh-CN"（仅有一处，内容：n，似乎本应创设为“Zhencao Zhong_【phrase】-text-zh-CN”，下文会详细讨论，没有下层节点）
+		# "Zhencao Zhong_phrase-gls-en"（仅有一处，内容：Yes.，没有下层节点）
+		# "Zhencao Zhong_phrase-gls-zh-CN"（仅有一处，且内容为空，没有下层节点）
+		# "Yang Xuefang_word-txt-zh-CN"（词空槽位，一般为空，仅有两处有内容：kʰɛiʂʐ̩、ma，但最重要的功能是联系起三层节点中的词形式和语素切分）
+				三层节点（词+语素切分）：
+				# "Yang Xuefang_word-txt-ybe"（词形式，下面不再有节点）
+				# "Yang Xuefang_morph-txt-ybe"（语素切分，一个词形式可以对应多个语素切分，一个语素切分联系起四层节点中的节点各一个）
+						四层节点（语素标注）：
+						# "Yang Xuefang_morph-hn-ybe"（语素在词典中的次序，可能有内容，也可能没有，是最底层的节点）
+						# "Yang Xuefang_morph-cf-ybe"（语素形式，是最底层的节点）
+						# "Yang Xuefang_morph-gls-en"（语素英文标注，是最底层的节点）
+						# "Yang Xuefang_morph-type"（词根词缀标注1，是最底层的节点）
+						# "Yang Xuefang_morph-variantTypes-en"（词根词缀标注2，一般为空，仅有一处补充了词根词缀1的内容，是最底层的节点）
+						
+总结如下：
+句子空槽位（Yang Xuefang）
+		句子编号
+		句子形式
+		句子英文翻译
+		句子中文翻译
+		词空槽位
+				词形式
+				语素切分
+						语素在词典中的次序
+						语素形式
+						语素英文标注
+						词根词缀标注1
+						词根词缀标注2
+句子空槽位2（ZhencaoZhong）
+		句子编号
+		句子形式
+		句子英文翻译
+		句子中文翻译		
+其他系统创设的元数据节点（interlinear-text-date-created-en、interlinear-text-date-modified-en、interlinear-text-title-en）
+						
+注意：
+一层节点中，句子空槽位命名为“XXX_phrase-txt-zh-CN”，本来应该只用来标定时间戳，但可能受名称的影响，有两处填入了“kʰɛiʂʐ̩ ma、n”，其实这两个节点和内容应该放置到二层，和二层节点“XXX_phrase-txt-ybe”并列，一层的这些节点应该另外取一个名字，实际上，二层节点的“Zhencao Zhong_word-txt-zh-CN”其实就应该命名为“Zhencao Zhong_【phrase】-txt-zh-CN”，其内容正是“n”。相应的，二层节点中的词空槽位命名为“Xuefang_word-txt-zh-CN”，本来应该为空，但有两处填入了“kʰɛiʂʐ̩、ma”，其实这个节点和内容应该放置到三层，和三层节点“Yang Xuefang_word-txt-ybe”并列，二层的这些节点应该另外取一个名字。
+  
+
+
+
+

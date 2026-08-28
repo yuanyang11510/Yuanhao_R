@@ -9,7 +9,7 @@ library(readxl)
 # 如果要清空所有变量，运行下面这行代码
 # rm(list = ls())
 
-tbl_n <- read_xlsx("./Source/N_tibetan_minyag.xlsx") %>% 
+tbl_n <- read_xlsx("./Source/N_Tibetan_Minyag.xlsx") %>% 
   rename(
     木雅语 = 语音形式,
     古藏文 = 藏文转写,
@@ -34,7 +34,11 @@ tbl_n <- read_xlsx("./Source/N_tibetan_minyag.xlsx") %>%
     I_5.Minyag = 声5...25,
     R_5.Minyag = 韵5...26
   ) %>% 
-  select(古藏文,木雅语,中文释义,contains(c("Tibetan","Minyag")))
+  select(古藏文,木雅语,中文释义,contains(c("Tibetan","Minyag"))) %>% 
+  mutate(
+    across(everything(),as.character),
+    across(everything(),~replace_na(.x,""))
+  )
 
 tbl_adj <- read_xlsx("./Source/Adj_tibetan_minyag.xlsx") %>% 
   rename(
@@ -53,7 +57,11 @@ tbl_adj <- read_xlsx("./Source/Adj_tibetan_minyag.xlsx") %>%
     I_3.Minyag = M声3,
     R_3.Minyag = M韵3,
   ) %>% 
-  select(古藏文,木雅语,中文释义,contains(c("Tibetan","Minyag")))
+  select(古藏文,木雅语,中文释义,contains(c("Tibetan","Minyag"))) %>% 
+  mutate(
+    across(everything(),as.character),
+    across(everything(),~replace_na(.x,""))
+  )
 
 tbl_v <- bind_rows(
   read_xlsx("./Source/V_tibetan_minyag.xlsx",sheet = 1) %>% 
@@ -95,7 +103,11 @@ tbl_v <- bind_rows(
     I_3.Minyag = M声3,
     R_3.Minyag = M韵3,
   ) %>% 
-  select(古藏文,木雅语,中文释义,contains(c("Tibetan","Minyag")))
+  select(古藏文,木雅语,中文释义,contains(c("Tibetan","Minyag"))) %>% 
+  mutate(
+    across(everything(),as.character),
+    across(everything(),~replace_na(.x,""))
+  )
 
 tbl_tibetan <- read_xlsx("./Source/Tibetan.xlsx") %>% 
   rename(
@@ -127,8 +139,10 @@ tbl_tibetan <- read_xlsx("./Source/Tibetan.xlsx") %>%
     I_6.KT = "声6-调6",
     R_6.KT = 韵6
   ) %>% 
-  select(
-    古藏文,康定藏语,中文释义,contains(c("OT","KT"))
+  select(古藏文,康定藏语,中文释义,contains(c("OT","KT"))) %>% 
+  mutate(
+    across(everything(),as.character),
+    across(everything(),~replace_na(.x,""))
   )
   
 # 最新的做法
@@ -249,10 +263,10 @@ tbl_corresp_tibetan <- tbl_tibetan %>%
   )
 
 # 导出表格
-write_excel_csv(tbl_corresp_n,"./Result/Correspondence_N.csv")
-write_excel_csv(tbl_corresp_adj,"./Result/Correspondence_Adj.csv")
-write_excel_csv(tbl_corresp_v,"./Result/Correspondence_V.csv")
-write_excel_csv(tbl_corresp_tibetan,"./Result/Correspondence_Tibetan.csv")
+# write_excel_csv(tbl_corresp_n,"./Result/Correspondence_N.csv")
+# write_excel_csv(tbl_corresp_adj,"./Result/Correspondence_Adj.csv")
+# write_excel_csv(tbl_corresp_v,"./Result/Correspondence_V.csv")
+# write_excel_csv(tbl_corresp_tibetan,"./Result/Correspondence_Tibetan.csv")
 
 # --------------------------------------------------------------------------------------------
 

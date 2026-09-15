@@ -1,5 +1,56 @@
 library(tidyverse)
 
+# pivot_longer()函数的cols_vary参数和pivot_wider()函数的names_vary参数
+# pivot_longer()函数，当cols参数为多列时，cols_vary参数会对结果产生影响
+tbl1 <- tibble(
+    FC = c("a1","a2"),
+    LT = c("b1","b2")
+)
+tbl1_longer_fastest <- tbl1 %>% 
+    pivot_longer(
+        cols = c(FC,LT),
+        names_to = "NAME",
+        values_to = "SYLLABLE",
+        cols_vary = "fastest" # 默认值
+    )
+tbl1_longer_slowest <- tbl1 %>% 
+    pivot_longer(
+        cols = c(FC,LT),
+        names_to = "NAME",
+        values_to = "SYLLABLE",
+        cols_vary = "slowest"
+    )
+tbl1
+tbl1_longer_fastest # 默认值，优先以行（此处可以具体化为“概念”）为单位
+tbl1_longer_slowest # 优先以列（此处可以具体化为“语言”）为单位
+
+# pivot_wider()函数，当values_from参数为多列时，names_vary参数会对结果产生影响
+tbl2 <- tibble(
+    ASSIST = c(1,1,2,2),
+    NAME = c("FC","LT","FC","LT"),
+    INITIAL = c("a1","a2","a1","a3"),
+    RHYME = c("b1","b2","b1","b3")
+)
+tbl2_wider_fastest <- tbl2 %>% 
+    pivot_wider(
+        names_from = c(NAME),
+        values_from = c(INITIAL,RHYME),
+        names_glue = "{.value}_{NAME}",
+        names_vary = "fastest" # 默认值
+    )
+tbl2_wider_slowest <- tbl2 %>% 
+    pivot_wider(
+        names_from = c(NAME),
+        values_from = c(INITIAL,RHYME),
+        names_glue = "{.value}_{NAME}",
+        names_vary = "slowest"
+    )
+tbl2
+tbl2_wider_fastest # 默认值，优先以VALUE列（此处可以具体化为“音系范畴：声韵调”）为单位
+tbl2_wider_slowest # 优先以NAME列（此处可以具体化为“语言”）为单位
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------以下是早先学习这两个函数的笔记
+
 # 载入例表
 FC_rule_longer_example <- read.csv("FC_rule_longer_example.csv") %>% 
     distinct() %>% 

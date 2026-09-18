@@ -88,3 +88,7 @@ str_detect("(",n1) # 报错：
 str_detect("(",m2) # 报错：
 # Error in stri_detect_regex(string, pattern, negate = negate, opts_regex = opts(pattern)) : Incorrectly nested parentheses in regex pattern. (U_REGEX_MISMATCHED_PAREN, context=`\\(`)
 str_detect("(",n2) # 返回TRUE
+
+## str_replace_all()函数中的replacement解析机制不是无意义的复杂化，而是因为其遵循一套“替换语法”（ChatGPT的表述），在replacement解析的阶段会根据这一语法实现一些功能，最典型的就是捕获组"\\1"、"\\2"这类形式，R将源代码经过字符串解析后得到"\1"、"\2"，再将其传给replacement参数，replacement解析机制再将其识别为捕获组，从而在参数pattern中引用相应的捕获组。
+## 由此，如果想要让str_replace_all()函数输出真正的"\1"、"\2"这样的字符串形式（表层形式），就要求replacement解析的阶段对反斜杠进行转义，即在replacement解析的阶段应该输入"\\1"、"\\2"这样的形式，又由于replacement解析阶段的反斜杠又来自R对源代码的字符串解析，因此输入参数replacement的源代码应该表示为"\\\\1"、"\\\\2"这样的形式。
+## case_when()函数不承担这种功能，而只是将源代码经过字符串解析之后的形式直接作为替换后的形式（表层形式），因此也就没有这么复杂的机制，输入时只需要考虑字符串本身的转义即可。

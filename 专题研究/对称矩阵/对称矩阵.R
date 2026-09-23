@@ -124,9 +124,11 @@ cross_join(tbl,tbl) %>%
     rename(ID = A.x)
 
 # 方法三：ChatGPT提供了一种方法，本质上和方法二相同，只是避免了提前为rownames列/colnames列数据定义顺序，而是直接根据这些数据对应的行号进行筛选，是一种比较巧妙的方法。
+#* 这种做法相比上一个方法有一个好处，就是不会改变rownames列和colnames列的数据类型。
+## 要记得将行号列转换为数值型，否则会按照字符串顺序比较大小，此处没有出现问题是因为没有涉及10以上的行号，如果按照字符串顺序，"2"会被认为大于"10"。
 cross_join(
-    tbl %>% rownames_to_column("RowNum"),
-    tbl %>% rownames_to_column("RowNum")
+    tbl %>% rownames_to_column("RowNum") %>% mutate(RowNum = as.integer(RowNum)),
+    tbl %>% rownames_to_column("RowNum") %>% mutate(RowNum = as.integer(RowNum))
 ) %>% 
     filter(RowNum.x >= RowNum.y) %>% # 直接根据rownames列/colnames列数据对应的行号进行筛选
     select(-c(RowNum.x,RowNum.y)) %>% # 删除行号列

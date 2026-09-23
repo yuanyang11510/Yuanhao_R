@@ -1,5 +1,74 @@
 library(tidyverse)
 
+# pivot_wider()函数的values_fill参数
+# 在文档中，values_fill参数的默认值是NULL，但实际上会根据values_from参数输入的列的数据类型返回不同的值。
+# VALUE列为字符串型
+# 缺失的数据返回NA_character_
+#* 但R不会输出"NA_character_"，而是只输出"NA"，只有通过typeof()函数才能看到其真实类型。
+tibble(
+    ID = 1:2,
+    NAME = c("a","b"),
+    VALUE = c("x","y")
+) %>% 
+    pivot_wider(
+        names_from = NAME,
+        values_from = VALUE
+    ) %>% 
+    .[[1,3]] %>% 
+    typeof()
+
+# VALUE列为数值型
+# 缺失的数据返回NA_real_
+#* 注意是"NA_real_"而不是"NA_double_"。
+tibble(
+    ID = 1:2,
+    NAME = c("a","b"),
+    VALUE = c(0,1)
+) %>% 
+    pivot_wider(
+        names_from = NAME,
+        values_from = VALUE
+    ) %>% 
+    .[[1,3]] %>% 
+    typeof()
+
+# VALUE列为逻辑型
+# 缺失的数据返回NA
+#* 注意逻辑型的缺失值形式就是"NA"而不是"NA_logical_"。
+tibble(
+    ID = 1:2,
+    NAME = c("a","b"),
+    VALUE = c(TRUE,FALSE)
+) %>% 
+    pivot_wider(
+        names_from = NAME,
+        values_from = VALUE
+    ) %>% 
+    .[[1,3]] %>% 
+    typeof()
+
+# VALUE列为列表
+# 缺失的数据返回NULL
+#* 注意，由于tibble具有特殊的元素提取机制，如果列是列表类型，直接使用[[i,j]]提取的结果是一个包含了对应元素的列表，而不会直接返回该元素本身。并且，如果使用管道符，会发现无法直接使用"%>% .[[i,j]][[1]]"的格式，而需要分两步进行："%>% .[[i,j]] %>% .[[1]]"。
+tibble(
+    ID = 1:2,
+    NAME = c("a","b"),
+    VALUE = list(1:2,3:4)
+) %>% 
+    pivot_wider(
+        names_from = NAME,
+        values_from = VALUE
+    ) %>% 
+    .[[1,3]] %>% 
+    .[[1]] %>% 
+    typeof()
+
+## 关于tibble和dataframe的元素提取机制的不同，可以比较以下两条命令：
+tibble(A = list(1:2)) %>% .[[1,1]] # 返回一个列表list(1:2)
+data.frame(A = I(list(1:2))) %>% .[[1,1]] # 返回列表中的元素1:2，是一个向量
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 # pivot_longer()函数的cols_vary参数和pivot_wider()函数的names_vary参数
 # pivot_longer()函数，当cols参数为多列时，cols_vary参数会对结果产生影响
 tbl1 <- tibble(

@@ -54,7 +54,6 @@
 						
 注意：
 一层节点中，句子空槽位命名为“XXX_phrase-txt-zh-CN”，本来应该只用来标定时间戳，但可能受名称的影响，有两处填入了“kʰɛiʂʐ̩ ma、n”，其实这两个节点和内容应该放置到二层，和二层节点“XXX_phrase-txt-ybe”并列，一层的这些节点应该另外取一个名字，实际上，二层节点的“Zhencao Zhong_word-txt-zh-CN”其实就应该命名为“Zhencao Zhong_【phrase】-txt-zh-CN”，其内容正是“n”。相应的，二层节点中的词空槽位命名为“Xuefang_word-txt-zh-CN”，本来应该为空，但有两处填入了“kʰɛiʂʐ̩、ma”，其实这个节点和内容应该放置到三层，和三层节点“Yang Xuefang_word-txt-ybe”并列，二层的这些节点应该另外取一个名字。
-  
 
 
 

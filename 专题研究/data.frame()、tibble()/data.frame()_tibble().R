@@ -12,7 +12,7 @@ data.frame(A = I(list(1:2,3:4,5))) # 输出一列，列名为A，每行是一个
 # tibble()函数中，输入列表时默认不会将列表展开为多列，而是将整个列表作为一列处理。
 tibble(A = list(1:2,3:4,5)) # 输出一列，列名为A，每行是一个向量
 
-# mutate()和summarise()函数中，如果RHS输入的是一个列表，默认会将整个列表作为一列处理，列表中的每个元素对应新列中的各行内容，而不会将列表展开为多列，不管数据框原本是dataframe还是tibble。
+# mutate()函数和summarise()函数中，如果RHS输入的是一个列表，默认会将整个列表作为一列处理，列表中的每个元素对应新列中的各行内容，而不会将列表展开为多列，不管数据框原本是dataframe还是tibble。
 data.frame(A = 1:2) %>% mutate(B = list(3:4)) # 添加新的一列B，由于列表中只有一个元素，因此扩展到各行
 tibble(A = 1:2) %>% mutate(B = list(3:4)) # tibble的表现和dataframe一致
 
@@ -21,4 +21,29 @@ tibble(A = 1:2) %>% mutate(B = list(3:4,5)) # tibble的表现和dataframe一致
 
 data.frame(A = c(1,1,2,2)) %>% summarise(.by = A,B = list(A)) # 添加新的一列B，A列的每个分组被压缩成一行，B列的每行内容来自A列每个分组内的元素，此处B列的各行是一个向量
 tibble(A = c(1,1,2,2)) %>% summarise(.by = A,B = list(A)) # tibble的表现和dataframe一致
+
+## 以上mutate()函数和summarise()函数中使用list()命令的表现，体现出这两个函数对在其中使用的list()命令的处理方式，一种粗浅的理解是：mutate()和summarise()当中的list()里面的内容会成为新列的内容，而不是说原本每一行或者分组之后每个分组内的内容会被装进一个列表，如果要实现后面这一种效果，就需要在list()的内部再使用一次list()。
+# 可以比较以下命令：
+tbl <- tibble(
+  A = c(1,1,2,2),
+  B = 3:6
+)
+tbl
+
+# 以下两条命令效果相同
+tbl %>% summarise(.by = A,C = list(c(3,4))) # 每一行是一个向量c(3,4)
+tbl %>% summarise(.by = A,C = list(B)) # 每一行是每个分组内的元素组成的向量；数据掩码机制下，"B"可以看做每个分组内部的成员组成的一个向量：c(b1,b2,...)
+
+# 以下两条命令效果相同
+tbl %>% summarise(.by = A,C = list(list(c(3,4)))) # 每一行是一个列表，该列表中包含一个向量c(3,4)
+tbl %>% summarise(.by = A,C = list(list(B))) # 每一行是一个列表，该列表中包含一个相应分组中的所有元素组成的向量
+
+# 以下命令会警告：
+# Warning message:
+# Returning more (or less) than 1 row per `summarise()` group was deprecated in dplyr 1.1.0.
+# ℹ Please use `reframe()` instead.
+# ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()` always returns an ungrouped data frame and adjust accordingly.
+#* 这是因为summarise()期望每个分组返回一行，而list(3,4)会返回多行，从而触发警告。
+tbl %>% summarise(.by = A,C = list(3,4))
+
 

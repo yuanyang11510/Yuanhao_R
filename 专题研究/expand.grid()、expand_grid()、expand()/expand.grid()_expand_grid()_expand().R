@@ -42,6 +42,34 @@ crossing(
     B = c("a","a","b")
 ) # "1-a"、"2-a"、"3-b"均只出现了一次
 
+## expand_grid()函数和crossing()函数中如果直接输入内容相同的数据框，会报错：
+# Error in `expand_grid()`:
+#· ! Names must be unique.
+# ✖ These names are duplicated:
+#   * "A" at locations 1 and 3.
+#   * "B" at locations 2 and 4.
+# ℹ Use argument `.name_repair` to specify repair strategy.
+
+# 第一种解决办法是设置参数.name_repair = "unique"，使列名唯一。
+expand_grid(tbl,tbl,.name_repair = "unique")
+crossing(tbl,tbl,.name_repair = "unique")
+# 或者为参数.name_repair传递一个函数，自定义列名。
+expand_grid(tbl,tbl,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
+crossing(tbl,tbl,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
+
+# 第二种解决办法是提前为两个数据框命名：
+# 但是这样输出的实际上是嵌套了两个子数据框的数据框，需要再经过as.list()和bind_cols()将内层嵌套去除，列名会被bind_cols()函数自动调整为唯一。
+expand_grid(A = tbl,B = tbl) %>% as.list() %>% bind_cols()
+crossing(A = tbl,B = tbl) %>% as.list() %>% bind_cols()
+# 也可以在bind_cols()函数中为参数.name_repair传递一个函数，自定义列名。
+expand_grid(A = tbl,B = tbl) %>% as.list() %>% bind_cols(,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
+crossing(A = tbl,B = tbl) %>% as.list() %>% bind_cols(,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
+
+# 第三种解决办法，也是推荐的做法，是使用cross_join()函数：
+# 结果会默认为重复命令加上后缀".x"和".y"，可以通过参数suffix进行设置。
+cross_join(tbl,tbl)
+cross_join(tbl,tbl,suffix = c("_1","_2"))
+
 # （4）expand()函数
 # expand()函数只应用于数据框。
 # expand()函数会自动删除重复的组合，并排序。

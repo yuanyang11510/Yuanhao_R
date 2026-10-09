@@ -159,7 +159,7 @@ tbl_corresp_n <- tbl_n %>%
     Syllable_n_Minyag = length(which(Minyag != ""))/2,
     Syllable_n = str_c("T:", Syllable_n_Tibetan, ";M:", Syllable_n_Minyag)
   ) %>% 
-  ungroup()%>% 
+  ungroup() %>% 
   select(-c(Syllable_n_Tibetan,Syllable_n_Minyag)) %>%
   # 筛选出T中的相应音节数的词
   filter(str_detect(Syllable_n,"T:1")) %>% 
@@ -188,7 +188,7 @@ tbl_corresp_adj <- tbl_adj %>%
     Syllable_n_Minyag = length(which(Minyag != ""))/2,
     Syllable_n = str_c("T:", Syllable_n_Tibetan, ";M:", Syllable_n_Minyag)
   ) %>% 
-  ungroup()%>% 
+  ungroup() %>% 
   select(-c(Syllable_n_Tibetan,Syllable_n_Minyag)) %>%
   # 筛选出T中的相应音节数的词
   filter(str_detect(Syllable_n,"T:1")) %>% 
@@ -217,7 +217,7 @@ tbl_corresp_v <- tbl_v %>%
     Syllable_n_Minyag = length(which(Minyag != ""))/2,
     Syllable_n = str_c("T:", Syllable_n_Tibetan, ";M:", Syllable_n_Minyag)
   ) %>% 
-  ungroup()%>% 
+  ungroup() %>% 
   select(-c(Syllable_n_Tibetan,Syllable_n_Minyag)) %>%
   # 筛选出T中的相应音节数的词
   filter(str_detect(Syllable_n,"T:1")) %>% 
@@ -246,7 +246,7 @@ tbl_corresp_tibetan <- tbl_tibetan %>%
     Syllable_n_KT = length(which(KT != ""))/2,
     Syllable_n = str_c("OT:", Syllable_n_OT, ";KT:", Syllable_n_KT)
   ) %>% 
-  ungroup()%>% 
+  ungroup() %>% 
   select(-c(Syllable_n_OT,Syllable_n_KT)) %>%
   # 筛选出OT的相应音节数的词
   filter(str_detect(Syllable_n,"OT:1")) %>% 

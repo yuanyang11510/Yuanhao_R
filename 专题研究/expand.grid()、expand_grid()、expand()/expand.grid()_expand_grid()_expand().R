@@ -54,16 +54,16 @@ crossing(
 expand_grid(tbl,tbl,.name_repair = "unique")
 crossing(tbl,tbl,.name_repair = "unique")
 # 或者为参数.name_repair传递一个函数，自定义列名。
-expand_grid(tbl,tbl,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
-crossing(tbl,tbl,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
+expand_grid(tbl,tbl,.name_repair = ~str_c(.x,seq_along(.x) %>% as.character()))
+crossing(tbl,tbl,.name_repair = ~str_c(.x,seq_along(.x) %>% as.character()))
 
 # 第二种解决办法是提前为两个数据框命名：
 # 但是这样输出的实际上是嵌套了两个子数据框的数据框，需要再经过as.list()和bind_cols()将内层嵌套去除，列名会被bind_cols()函数自动调整为唯一。
 expand_grid(A = tbl,B = tbl) %>% as.list() %>% bind_cols()
 crossing(A = tbl,B = tbl) %>% as.list() %>% bind_cols()
 # 也可以在bind_cols()函数中为参数.name_repair传递一个函数，自定义列名。
-expand_grid(A = tbl,B = tbl) %>% as.list() %>% bind_cols(,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
-crossing(A = tbl,B = tbl) %>% as.list() %>% bind_cols(,.name_repair = ~map2_vec(.x,seq_along(.x) %>% as.character(),str_c))
+expand_grid(A = tbl,B = tbl) %>% as.list() %>% bind_cols(,.name_repair = ~str_c(.x,seq_along(.x) %>% as.character()))
+crossing(A = tbl,B = tbl) %>% as.list() %>% bind_cols(,.name_repair = ~str_c(.x,seq_along(.x) %>% as.character()))
 
 # 第三种解决办法，也是推荐的做法，是使用cross_join()函数：
 # 结果会默认为重复命令加上后缀".x"和".y"，可以通过参数suffix进行设置。

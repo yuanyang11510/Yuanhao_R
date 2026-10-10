@@ -4,6 +4,9 @@
 *.xml
 *.iml
 *.txt
+!使用说明.txt
+*.csv
+*.xlsx
 
 #! R.gitignore
 # History files

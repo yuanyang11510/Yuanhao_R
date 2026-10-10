@@ -1,0 +1,4 @@
+-从"Compare_Morpheme_Gloss.Rproj"文件进入，点击左上角File-OpenFile，选择文件Compare_Morpheme_Gloss.R，运行代码。
+-需要处理的.txt文件放置在"Source"文件夹中。 
+-.txt文件中的每个句子单元需要严格按照“序号-句子-翻译-语素-标注”的顺序排列，每个部分占据一行，可以有空行（代码会自动排除这些空行）。
+-导出的.csv文件在"Result"文件夹中。
